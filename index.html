@@ -1,0 +1,1832 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111315">
+  <meta name="description" content="Code formatieren und minifizieren: HTML, CSS, JavaScript, MySQL, PHP, Python und JSON mit Syntax-Highlighting und Fehleranzeige.">
+  <title>prettycode. — Code-Formatter</title>
+  <style>
+:root{color-scheme:dark;--bg:#111315;--panel:#181b1e;--editor:#15181b;--border:#2c3034;--border-soft:#25292d;--text:#e7e9eb;--muted:#8b939c;--subtle:#59616b;--accent:#b6edbd;--accent-dim:#20382a;--error:#ff9b9b;--mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;--sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{min-width:340px}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}button,input,textarea,select{font:inherit}button,select{cursor:pointer}button{color:inherit}button:disabled{cursor:default;opacity:.35}button{border:0}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button,select{touch-action:manipulation}button,select,.switch-track{transition:background .15s,color .15s,border-color .15s,opacity .15s}svg{width:18px;height:18px;display:block;flex-shrink:0}span[data-icon]{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}button span[data-icon]{pointer-events:none}[hidden]{display:none!important}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+.site-header{height:80px;border-bottom:1px solid var(--border-soft);padding:0 42px;display:flex;align-items:center;justify-content:space-between;max-width:1800px;margin:auto}.brand{display:flex;align-items:center;font-size:22px;font-weight:650;letter-spacing:-.7px;gap:11px}.brand-symbol{width:35px;height:35px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#18261c;background:var(--accent);font-size:23px;font-family:var(--mono);letter-spacing:-4px;padding-right:4px;font-weight:500}.brand-symbol span{font-size:25px;transform:translateY(-2px);padding-right:3px}.brand-dot{color:var(--accent)}.brand-divider{height:20px;background:var(--border);width:1px;margin:0 8px 0 14px}.brand-caption{font-size:12px;letter-spacing:.05px;font-weight:400;color:var(--muted)}.header-actions{display:flex;align-items:center;gap:24px}.privacy-label{display:flex;align-items:center;gap:8px;color:#9da6ae;font-size:12px}.status-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;flex-shrink:0}.icon-button{width:32px;height:32px;display:inline-flex;justify-content:center;align-items:center;border-radius:6px;background:transparent;color:var(--muted)}.icon-button:hover:not(:disabled){background:#2b3035;color:var(--text)}.icon-button.subtle{width:30px;height:30px}.icon-button svg{width:16px;height:16px}
+main{max-width:1560px;margin:0 auto;padding:43px 42px 0}.intro{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px}.eyebrow{font-size:10px;font-weight:650;letter-spacing:1.5px;color:var(--muted);display:flex;align-items:center;gap:7px}.tiny-spark{color:var(--accent);font-size:15px;line-height:15px}h1{font-size:34px;line-height:1.2;letter-spacing:-1.3px;font-weight:600;margin:11px 0 9px}h1 span{color:var(--accent)}.intro p{margin:0;color:var(--muted);font-size:13px}.import-actions{display:flex;gap:9px;padding-bottom:3px}.button{border-radius:7px;padding:10px 14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:550;white-space:nowrap;border:1px solid transparent;min-height:39px}.button svg{width:16px;height:16px}.button-secondary{border-color:#343a40;background:#1c2024;color:#d1d5d8}.button-secondary:hover{background:#292f34;border-color:#46505a}.button-light{background:#e5e9e6;color:#1d2520}.button-light:hover{background:#fff}.button kbd{font-size:10px;margin-left:7px;font-weight:450;color:inherit;opacity:.6}.button-primary{background:var(--accent);color:#16331e}.button-primary:hover{background:#c9f5ce}kbd{font-family:var(--sans);font-size:10px;white-space:nowrap}
+.workspace{border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 10px 50px #0000001a;background:var(--panel)}.toolbar{display:flex;align-items:center;justify-content:space-between;padding:12px 15px;gap:12px;border-bottom:1px solid var(--border);min-height:63px;background:#1c2023}.toolbar-left,.toolbar-right{display:flex;align-items:center;gap:14px;min-width:0}.toolbar-left{gap:12px}.language-field{display:flex;align-items:center;gap:8px;flex-shrink:0}.accent-icon{color:var(--accent)}select{appearance:none;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b939c' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right 5px center/12px no-repeat;border:0;color:#ced4d9;padding:7px 24px 7px 2px;min-height:32px;font-size:12px;border-radius:4px}select:hover{color:var(--text);background-color:#24292d}select option{background:#20252a;color:#e7e9eb}.language-field select{color:#e4e9ed;max-width:190px}.language-field svg{height:16px;width:16px}.toolbar-divider{width:1px;height:22px;background:#373c42;margin:0 4px}.select-field{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px}.select-field svg{height:15px;width:15px}.field-label{font-size:11px;color:var(--muted)}.width-field{gap:8px}.width-field select{max-width:61px}.live-switch{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:11px;color:#a7b0b8;white-space:nowrap}.live-switch input{position:absolute;opacity:0;width:1px;height:1px}.switch-track{width:26px;height:15px;border-radius:20px;background:#464d55;position:relative;display:inline-block}.switch-track:after{content:"";position:absolute;width:9px;height:9px;left:3px;top:3px;background:#b2bac2;border-radius:50%;transition:transform .15s}.live-switch input:checked+.switch-track{background:#446c4d}.live-switch input:checked+.switch-track:after{background:var(--accent);transform:translateX(11px)}.live-switch input:focus-visible+.switch-track{outline:2px solid var(--accent);outline-offset:3px}.format-button{background:var(--accent);color:#1a3420;min-height:35px;padding:7px 10px}.format-button:hover{background:#c8f7cf}.format-button kbd{margin-left:5px}.settings-panel{padding:12px 18px;display:flex;align-items:center;gap:22px;border-bottom:1px solid var(--border);font-size:12px;background:#202528}.settings-panel label{display:flex;gap:7px;align-items:center;white-space:nowrap}.settings-panel input{accent-color:#b6edbd}.settings-panel>span{margin-left:auto;font-size:11px;color:var(--muted)}
+.editors{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--editor)}.editor-pane{min-width:0;position:relative;display:flex;flex-direction:column}.source-pane{border-right:1px solid var(--border)}.pane-header{height:49px;padding:0 17px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-soft);background:#191d20;gap:8px}.pane-title{display:flex;align-items:center;gap:9px;min-width:0}.pane-title svg{width:15px;height:15px;color:var(--muted)}.pane-title .accent-icon svg{color:var(--accent)}.pane-title h2{font-size:12px;font-weight:550;margin:0;white-space:nowrap}.file-badge{padding:2px 7px;border-radius:4px;border:1px solid #30363c;font-size:10px;color:#8f9aa4;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:5px}.output-actions{display:flex;align-items:center;gap:6px}.copy-button{display:flex;align-items:center;gap:6px;font-size:11px;color:#9ea9b3;background:transparent;padding:6px 8px;border:1px solid transparent;border-radius:5px;white-space:nowrap}.copy-button svg{width:14px;height:14px}.copy-button:hover:not(:disabled){border-color:#41494f;color:var(--text);background:#252b2f}.result-badge{display:flex;align-items:center;gap:6px;color:#96cba0;font-size:9px;border:1px solid #304a38;border-radius:4px;padding:2px 6px;margin-left:4px;white-space:nowrap}.result-badge .status-dot{width:4px;height:4px}.result-badge.error{color:var(--error);border-color:#5b3539}.result-badge.error .status-dot{background:var(--error)}.result-badge.pending{color:#b2b7bc;border-color:#41474c}.result-badge.pending .status-dot{background:#a5acb3}.result-badge.notice{color:#e1c086;border-color:#594b36}.result-badge.notice .status-dot{background:#e1c086}
+.source-editor,.output-editor{height:clamp(360px,49vh,640px);min-height:360px;position:relative;background:var(--editor)}.source-editor{display:flex;overflow:hidden}.source-editor:focus-within{box-shadow:inset 0 0 0 1px #4b6052}.input-area{position:relative;flex:1;min-width:0}.line-gutter{width:48px;flex-shrink:0;text-align:right;color:#505b65;user-select:none;overflow:hidden;background:#15181b}.line-gutter pre{font-family:var(--mono);font-size:12px;line-height:23px;margin:0;padding:21px 12px 20px 0;white-space:pre}.line-gutter pre .error-line{color:#ff9292;font-weight:700;background:#5e282f;border-radius:2px}#sourceInput{width:100%;height:100%;background:transparent;color:#b5c0cb;resize:none;border:0;outline:0;font-family:var(--mono);font-size:12px;line-height:23px;tab-size:2;padding:21px 17px 20px 4px;white-space:pre;overflow:auto;border-radius:0;caret-color:var(--accent)}#sourceInput::selection{background:#3d5e48;color:#f3fff6}.output-editor{display:flex;overflow:auto;outline-offset:-2px;background:#161a1d}.output-gutter{position:sticky;left:0;z-index:1;background:#161a1d;min-height:100%;height:fit-content;overflow:visible}.output-pre{flex:1;min-width:0;margin:0;font-family:var(--mono);font-size:12px;line-height:23px;tab-size:2;padding:21px 20px 20px 4px;color:#d5dde5;overflow:visible;height:fit-content;white-space:pre}.output-pre code{font:inherit;display:block;min-width:max-content;min-height:23px}.output-placeholder,.input-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;text-align:center;padding:24px;color:var(--subtle);pointer-events:none}.output-placeholder>span[data-icon]{margin-bottom:7px;color:#4b6353}.output-placeholder svg{width:28px;height:28px}.output-placeholder strong,.input-placeholder strong{font-size:13px;font-weight:500;color:#828e99}.output-placeholder>span:last-child,.input-placeholder>span{font-size:11px}.input-placeholder>.placeholder-icon{height:47px;width:47px;display:grid;place-items:center;border:1px solid #333b42;border-radius:10px;margin-bottom:8px;color:#96b39d}.input-placeholder .text-button{pointer-events:auto;margin-top:8px;color:var(--accent);position:relative;z-index:1}.input-placeholder{padding:15px}.pane-footer{height:35px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 15px;color:#68747f;font-size:10px;border-top:1px solid var(--border-soft);background:#171b1e;white-space:nowrap}.drop-hint{display:flex;gap:6px;align-items:center;margin-left:auto;margin-right:12px}.drop-hint svg{width:12px;height:12px}.text-button{display:inline-flex;align-items:center;justify-content:center;gap:5px;background:transparent;color:#8c9b91;font-size:inherit;padding:0}.text-button:hover:not(:disabled){color:var(--accent)}.use-output{font-size:10px;color:#8b9a91;margin-left:auto}.use-output svg{width:12px;height:12px}#timingLabel{padding-left:2px;color:#82918a}.drop-overlay{position:absolute;inset:8px;border:1px dashed var(--accent);border-radius:7px;z-index:5;background:#16241ff5;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;pointer-events:none;color:var(--accent)}.drop-overlay svg{width:35px;height:35px}.drop-overlay strong{font-size:20px;font-weight:500}.drop-overlay>span:last-child{font-size:12px;color:#a7b4ad}
+.statusbar{min-height:38px;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;gap:12px;background:#1c2223;border-top:1px solid #2e3831;font-size:10px;color:#95a79b}.status-main{display:flex;align-items:center;gap:8px}.status-main .status-dot{width:5px;height:5px}.status-meta{display:flex;align-items:center;gap:10px;color:#87958e;white-space:nowrap}.status-separator{color:#49574e}.statusbar.is-error{background:#2b2024;border-color:#4f3037;color:#f0a6ae}.statusbar.is-error .status-dot{background:var(--error)}.statusbar.is-pending{background:#202427;border-color:#31383d;color:#a1adb7}.statusbar.is-pending .status-dot{background:#adb8c0;animation:pulse 1.2s infinite}.statusbar.is-neutral{background:#1c2023;border-color:var(--border);color:#909da7}.statusbar.is-neutral .status-dot{background:#7f8d98}.diagnostic{display:flex;gap:12px;padding:15px 19px;align-items:flex-start;color:#edabb2;background:#2c2025;border-top:1px solid #60353e}.diagnostic>span{margin-top:2px}.diagnostic strong{font-size:12px;font-weight:550}.diagnostic pre{font:11px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;margin:5px 0 0;color:#c88e96;max-height:130px;overflow:auto}.diagnostic .text-button{font-size:11px;color:#e7b4b9;margin-left:auto;flex-shrink:0;padding-top:2px}.diagnostic>div{min-width:0}.diagnostic.notice{background:#2b271f;border-color:#594c33;color:#e2c894}.diagnostic.notice pre{color:#b8a078}
+.examples{display:flex;align-items:center;justify-content:center;gap:20px;padding:22px 10px 21px;border-bottom:1px solid var(--border-soft)}.examples-label{font-size:11px;color:#7e8a94}.example-buttons{display:flex;flex-wrap:wrap;gap:5px}.example-buttons button{display:flex;align-items:center;gap:6px;background:transparent;color:#939fa9;font-size:11px;padding:6px 9px;border:1px solid transparent;border-radius:5px}.example-buttons button:hover{background:#252b2e;color:#d0d8de}.example-buttons button.active{background:#242b27;border-color:#3a4a3e;color:#c7dbcc}.language-dot{width:5px;height:5px;border-radius:50%;opacity:.9}.language-dot.html{background:#e99b7f}.language-dot.css{background:#94b5f6}.language-dot.javascript{background:#e9cc7c}.language-dot.mysql{background:#8cccd1}.language-dot.php{background:#aba1e3}.language-dot.python{background:#9dc2ed}.language-dot.json{background:#c2c9d0}.bottom-notes{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 1px;color:#73807b;font-size:10px}.bottom-notes>span{display:flex;align-items:center;gap:7px}.bottom-notes svg{height:12px;width:12px}.bottom-notes kbd{background:#242b27;border:1px solid #36413a;border-radius:4px;padding:1px 5px;color:#9aaea0;font-size:9px}.note-divider{padding:0 8px;color:#46534b}.bottom-notes .text-button{color:#8c9e93}.site-footer{max-width:1560px;margin:0 auto;padding:22px 43px 26px;display:flex;justify-content:space-between;align-items:center;color:#4f5b55;font-size:10px;gap:12px}.site-footer>span:last-child{font-size:8px;letter-spacing:1.1px;display:flex;align-items:center;gap:10px}.footer-star{color:#82a58b;font-size:18px}
+.hljs-comment,.hljs-quote{color:#657b75;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-literal,.hljs-meta .hljs-keyword{color:#c0a8e5}.hljs-string,.hljs-regexp,.hljs-attribute,.hljs-meta .hljs-string{color:#b7d7a1}.hljs-number,.hljs-symbol,.hljs-bullet{color:#dfb77f}.hljs-title,.hljs-title.function_,.hljs-section{color:#8bc6de}.hljs-title.class_,.hljs-type,.hljs-built_in{color:#e2c996}.hljs-attr,.hljs-variable,.hljs-template-variable{color:#a7c9db}.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#dfad9c}.hljs-punctuation,.hljs-operator{color:#9ba7b2}.hljs-params,.hljs-subst{color:#c5cfd7}.hljs-property{color:#b4d1e0}.hljs-doctag,.hljs-meta{color:#bc9fcf}.hljs-addition{color:#b7d7a1}.hljs-deletion{color:#e6a1a1}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 30px);z-index:20;display:flex;align-items:center;gap:10px;padding:12px 18px;background:#283a2e;border:1px solid #4d6c55;border-radius:9px;box-shadow:0 8px 32px #0006;color:#c3e8ca;font-size:12px}.toast svg{width:16px;height:16px}dialog{color:var(--text);width:min(590px,calc(100vw - 30px));max-height:calc(100vh - 50px);padding:25px 30px 29px;background:#1b2023;border:1px solid #3b4449;border-radius:14px;box-shadow:0 25px 100px #0009;overflow:auto}dialog::backdrop{background:#050809b0;backdrop-filter:blur(5px)}.dialog-header{display:flex;align-items:center;justify-content:space-between;gap:10px}dialog h2{font-size:25px;font-weight:550;letter-spacing:-.5px;margin:14px 0 12px}dialog p{font-size:13px;line-height:1.7;color:#a5b0b8}.help-list{margin:22px 0}.help-list>div{padding:12px 0;border-top:1px solid #30383e}.help-list dt{font-size:12px;font-weight:600;color:#c8dcd0;margin-bottom:4px}.help-list dd{margin:0;font-size:12px;line-height:1.7;color:#909fa8}.shortcut-list{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:#9eaeb5}.shortcut-list kbd{border:1px solid #46514d;padding:1px 5px;border-radius:3px}.library-note{font-size:10px!important;color:#6e8078!important;margin:20px 0}.noscript-message{position:fixed;inset:0;background:#171c20ed;color:#d6e5dd;display:grid;place-content:center;padding:30px;font-size:20px}.editors.is-expanded{grid-template-columns:minmax(0,1fr)}.editors.is-expanded .source-pane{display:none}.editors.is-expanded .output-editor{height:65vh}.is-working #formatButton [data-icon="wand"]{animation:pulse 1s infinite}::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:#343d43;border-radius:6px;border:2px solid var(--editor)}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-corner{background:transparent}@keyframes pulse{50%{opacity:.35}}
+@media(min-width:1600px){.site-header{padding-left:calc((100vw - 1476px)/2);padding-right:calc((100vw - 1476px)/2);max-width:none}main{padding-top:50px}.source-editor,.output-editor{height:51vh}}
+@media(max-width:1200px){.site-header{padding:0 25px}main{padding:32px 25px 0}.site-footer{padding-left:26px;padding-right:26px}.width-field .field-label{display:none}.toolbar-left{gap:8px}.toolbar-right{gap:10px}.live-switch{font-size:10px}.language-field select{font-size:11px;max-width:179px}.toolbar-divider{margin:0 2px}.result-badge{font-size:8px}.pane-header{padding:0 12px}.pane-title{gap:6px}.drop-hint{display:none}.format-button kbd{display:none}.file-badge{max-width:120px}h1{font-size:31px}}
+@media(max-width:930px){.toolbar{flex-wrap:wrap;padding:10px 13px}.toolbar-left{flex:1}.toolbar-right{margin-left:auto}.width-field{display:none}.toolbar-left .toolbar-divider{display:none}.select-field select{font-size:11px}.intro{align-items:center}.import-actions{flex-direction:column;gap:7px}.import-actions .button{padding:8px 12px;min-height:34px}.import-actions kbd{display:none}.source-editor,.output-editor{height:390px}.result-badge{display:none}.pane-title h2{font-size:11px}.examples{gap:9px;flex-wrap:wrap}.example-buttons{gap:2px}.use-output{font-size:9px}.file-badge{max-width:100px}.privacy-label{font-size:11px}.bottom-notes{font-size:9px}.settings-panel{flex-wrap:wrap;gap:10px 20px}.settings-panel>span{margin-left:0;width:100%}.diagnostic .text-button{font-size:10px}.format-button{font-size:11px}.toolbar-right{gap:12px}.live-switch>span:last-child{font-size:10px}}
+@media(max-width:700px){.site-header{height:67px;padding:0 18px}.brand{font-size:20px;gap:9px}.brand-symbol{height:31px;width:31px;font-size:20px}.brand-caption,.brand-divider,.privacy-label{display:none}.header-actions{gap:10px}.site-header .icon-button{border:1px solid var(--border)}main{padding:28px 16px 0}.intro{align-items:flex-start;flex-direction:column;gap:20px;margin-bottom:21px}h1{font-size:30px;letter-spacing:-1.1px;margin-top:10px}.intro p{font-size:12px}.eyebrow{font-size:9px;letter-spacing:1.3px}.import-actions{flex-direction:row;width:100%}.import-actions .button{min-height:38px;padding:8px 14px}.toolbar{gap:8px;padding:10px 10px}.toolbar-left{width:100%;gap:8px;justify-content:space-between}.language-field{gap:5px}.language-field select{font-size:11px;max-width:177px}.language-field svg{width:14px;height:14px}.select-field{gap:3px}.select-field svg{width:13px;height:13px}.select-field select{max-width:113px}.toolbar-right{width:100%;justify-content:space-between;padding-top:3px}.live-switch>span:last-child{font-size:11px}.format-button{font-size:11px;min-height:33px;padding:6px 12px}.format-button kbd{display:inline}.editors{grid-template-columns:minmax(0,1fr)}.source-pane{border-right:0;border-bottom:1px solid var(--border)}.source-editor{height:260px;min-height:260px}.output-editor{height:370px;min-height:300px}.pane-header{height:44px;padding:0 12px}.pane-title h2{font-size:12px}.result-badge{display:flex;font-size:9px}.file-badge{max-width:180px}.drop-hint{display:flex;font-size:9px}.pane-footer{padding:0 11px;font-size:9px;height:32px}.line-gutter{width:38px}.line-gutter pre{padding-right:10px}#sourceInput,.output-pre,.line-gutter pre{font-size:11px;line-height:22px;padding-top:16px}.output-pre{padding-right:14px}#sourceInput{padding-right:12px}.statusbar{align-items:flex-start;flex-direction:column;gap:5px;padding:9px 12px;font-size:10px}.status-meta{padding-left:13px;font-size:9px}.examples{padding:18px 0 16px;gap:10px;flex-direction:column}.examples-label{font-size:10px}.example-buttons{justify-content:center;gap:3px}.example-buttons button{font-size:10px;padding:5px 7px}.bottom-notes{align-items:flex-start;flex-direction:column;gap:10px;padding:15px 0;font-size:9px}.site-footer{padding:19px 17px 24px;align-items:flex-start;flex-direction:column;gap:8px;font-size:9px}.site-footer>span:last-child{font-size:7px}.diagnostic{padding:12px;gap:8px;flex-wrap:wrap}.diagnostic>div{flex:1;min-width:180px}.diagnostic .text-button{margin-left:26px}.settings-panel{padding:12px;font-size:11px}.settings-panel>span{font-size:10px}.toast{font-size:11px;bottom:18px}dialog{padding:19px 22px}dialog h2{font-size:23px}.editors.is-expanded .output-editor{height:65vh}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* Compact workspace and adjacent processing switches. */
+main{padding-top:24px}
+.intro{justify-content:flex-end;margin-bottom:16px}
+.intro .import-actions{flex-direction:row;padding-bottom:0}
+.mode-switches{display:flex;align-items:center;gap:14px}
+.toolbar-right{flex-wrap:wrap}
+.bottom-notes{justify-content:flex-end;padding-bottom:28px}
+@media(max-width:930px){.intro{align-items:flex-end}.toolbar-right{row-gap:10px}}
+@media(max-width:700px){main{padding-top:18px}.intro{align-items:flex-end;gap:0;margin-bottom:15px}.intro .import-actions{justify-content:flex-end}.toolbar-right{justify-content:flex-start;column-gap:12px;row-gap:10px}.toolbar-right .format-button{margin-left:auto}.format-button kbd{display:none}.mode-switches{gap:12px}.live-switch>span:last-child{font-size:10px}.bottom-notes{align-items:flex-end}}
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand" aria-label="prettycode">
+      <span class="brand-symbol" aria-hidden="true">{<span>·</span>}</span>
+      <span>prettycode<span class="brand-dot">.</span></span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-button" id="helpButton" title="Hilfe & Tastenkürzel" aria-label="Hilfe und Tastenkürzel öffnen"><span data-icon="help"></span></button>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="sr-only">Code-Formatter</h1>
+    <section class="intro" aria-label="Code importieren">
+      <div class="import-actions">
+        <button class="button button-secondary" id="pasteButton"><span data-icon="clipboard"></span> Einfügen</button>
+        <button class="button button-light" id="fileButton"><span data-icon="folder"></span> Datei öffnen <kbd>⌘ O</kbd></button>
+        <input type="file" id="fileInput" accept=".html,.htm,.xhtml,.css,.js,.mjs,.cjs,.jsx,.sql,.mysql,.php,.phtml,.py,.pyw,.json,.txt,text/*,application/json,application/javascript" hidden>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Code-Formatter">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <div class="language-field">
+            <span data-icon="sparkles" class="accent-icon"></span>
+            <label for="languageSelect" class="sr-only">Programmiersprache</label>
+            <select id="languageSelect">
+              <option value="auto">Automatisch erkennen</option>
+              <option value="html">HTML</option><option value="css">CSS</option><option value="javascript">JavaScript</option>
+              <option value="mysql">MySQL</option><option value="php">PHP</option><option value="python">Python</option><option value="json">JSON</option>
+            </select>
+          </div>
+          <span class="toolbar-divider"></span>
+          <label class="select-field"><span data-icon="indent"></span><span class="sr-only">Einrückung</span><select id="indentSelect"><option value="2">2 Leerzeichen</option><option value="4">4 Leerzeichen</option><option value="tab">Tabs</option></select></label>
+          <label class="select-field width-field"><span class="field-label">Zeilenbreite</span><select id="widthSelect" aria-label="Gewünschte Zeilenbreite"><option value="80">80</option><option value="100" selected>100</option><option value="120">120</option></select></label>
+          <button id="settingsButton" class="icon-button" title="Weitere Formatierungsoptionen" aria-label="Weitere Formatierungsoptionen" aria-expanded="false" aria-controls="settingsPanel"><span data-icon="sliders"></span></button>
+        </div>
+        <div class="toolbar-right">
+          <div class="mode-switches">
+            <label class="live-switch"><input type="checkbox" id="liveToggle" checked><span class="switch-track" aria-hidden="true"></span><span>Live-Formatierung</span></label>
+            <label class="live-switch"><input type="checkbox" id="minifyToggle" autocomplete="off"><span class="switch-track" aria-hidden="true"></span><span>Minify</span></label>
+          </div>
+          <button class="button format-button" id="formatButton"><span data-icon="wand"></span><span id="formatButtonLabel">Formatieren</span><kbd>⌘ ↵</kbd></button>
+        </div>
+      </div>
+
+      <div id="settingsPanel" class="settings-panel" hidden>
+        <label><input type="checkbox" id="semiToggle" checked> Semikolons in JavaScript</label>
+        <label><input type="checkbox" id="quoteToggle"> Einfache Anführungszeichen</label>
+        <span id="settingsNote">Optionen gelten, soweit die jeweilige Sprache sie unterstützt.</span>
+      </div>
+
+      <div class="editors" id="editors">
+        <section class="editor-pane source-pane" id="sourcePane" aria-labelledby="sourceTitle">
+          <header class="pane-header">
+            <div class="pane-title"><span data-icon="code"></span><h2 id="sourceTitle">Eingabe</h2><span id="fileBadge" class="file-badge">Beispiel</span></div>
+            <button class="icon-button subtle" id="clearButton" aria-label="Eingabe leeren" title="Eingabe leeren"><span data-icon="trash"></span></button>
+          </header>
+          <div class="source-editor" id="sourceEditor">
+            <div class="line-gutter" aria-hidden="true"><pre id="inputLines">1</pre></div>
+            <div class="input-area">
+              <textarea id="sourceInput" aria-label="Quellcode eingeben oder einfügen" aria-describedby="inputKeyboardHelp" wrap="off" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off"></textarea>
+              <span id="inputKeyboardHelp" class="sr-only">Tab rückt Code ein. Escape und anschließend Tab verlässt das Eingabefeld.</span>
+              <div class="input-placeholder" id="inputPlaceholder" hidden><span class="placeholder-icon" data-icon="code"></span><strong>Hier beginnt dein schöner Code.</strong><span>Code einfügen oder eine Datei hierher ziehen.</span><button class="text-button" id="emptyExampleButton">Mit einem Beispiel starten <span aria-hidden="true">↗</span></button></div>
+            </div>
+            <div class="drop-overlay" id="dropOverlay" hidden><span data-icon="upload"></span><strong>Datei hier ablegen</strong><span>oder Text direkt in die Eingabe ziehen</span></div>
+          </div>
+          <footer class="pane-footer"><span id="inputStats">0 Zeilen · 0 Zeichen</span><span class="drop-hint"><span data-icon="upload"></span> Drag & Drop</span><span id="cursorPosition">Z 1, S 1</span></footer>
+        </section>
+
+        <section class="editor-pane output-pane" id="outputPane" aria-labelledby="outputTitle">
+          <header class="pane-header">
+            <div class="pane-title"><span data-icon="sparkles" class="accent-icon"></span><h2 id="outputTitle">Ergebnis</h2><span class="result-badge" id="resultBadge"><span class="status-dot"></span> Bereit</span></div>
+            <div class="output-actions"><button class="copy-button" id="copyButton" disabled><span data-icon="copy"></span><span>Kopieren</span></button><button class="icon-button subtle" id="downloadButton" title="Formatierten Code herunterladen" aria-label="Formatierten Code herunterladen" disabled><span data-icon="download"></span></button><button class="icon-button subtle" id="expandButton" title="Ergebnis vergrößern" aria-label="Ergebnis vergrößern" aria-pressed="false"><span data-icon="expand"></span></button></div>
+          </header>
+          <div class="output-editor" id="outputEditor" tabindex="0" role="region" aria-label="Formatierter Code">
+            <div class="line-gutter output-gutter" aria-hidden="true"><pre id="outputLines">1</pre></div>
+            <pre class="output-pre"><code id="outputCode"></code></pre>
+            <div class="output-placeholder" id="outputPlaceholder"><span data-icon="sparkles"></span><strong>Ein bisschen Ordnung wartet hier.</strong><span>Dein formatierter Code erscheint automatisch.</span></div>
+          </div>
+          <footer class="pane-footer"><span id="outputStats">Bereit für deinen Code</span><button class="text-button use-output" id="useOutputButton" disabled><span data-icon="arrow-left"></span> Als Eingabe übernehmen</button><span id="timingLabel"></span></footer>
+        </section>
+      </div>
+
+      <div class="diagnostic" id="diagnostic" hidden role="status" aria-live="polite">
+        <span data-icon="alert"></span><div><strong id="diagnosticTitle"></strong><pre id="diagnosticMessage"></pre></div><button class="text-button" id="jumpErrorButton" hidden>Zur Fehlerstelle <span aria-hidden="true">↗</span></button>
+      </div>
+
+      <div class="statusbar" role="status" aria-live="polite" aria-atomic="true">
+        <div class="status-main"><span class="status-dot" id="stateDot"></span><span id="statusText">Formatter wird vorbereitet …</span></div>
+        <div class="status-meta"><span id="languageStatus">JavaScript</span><span class="status-separator">·</span><span id="engineStatus">Prettier</span><span class="status-separator">·</span><span>UTF-8</span></div>
+      </div>
+    </section>
+
+    <section class="examples" aria-label="Sprachbeispiele">
+      <span class="examples-label">Einfach ausprobieren</span>
+      <div class="example-buttons">
+        <button data-language="html"><span class="language-dot html"></span>HTML</button><button data-language="css"><span class="language-dot css"></span>CSS</button><button data-language="javascript" class="active"><span class="language-dot javascript"></span>JavaScript</button><button data-language="mysql"><span class="language-dot mysql"></span>MySQL</button><button data-language="php"><span class="language-dot php"></span>PHP</button><button data-language="python"><span class="language-dot python"></span>Python</button><button data-language="json"><span class="language-dot json"></span>JSON</button>
+      </div>
+    </section>
+
+    <div class="bottom-notes"><span><kbd id="formatShortcut">Ctrl ↵</kbd> zum Formatieren</span></div>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden><span data-icon="check"></span><span id="toastText"></span></div>
+
+  <dialog id="helpDialog">
+    <div class="dialog-header"><span class="eyebrow">PRETTYCODE / HILFE</span><button class="icon-button" id="closeHelpButton" aria-label="Hilfe schließen"><span data-icon="close"></span></button></div>
+    <h2>Ein Werkzeug. Sieben Sprachen.</h2>
+    <p>Füge Code ein, öffne eine Datei oder ziehe sie in die Eingabe. Das Ergebnis aktualisiert sich nach einer kurzen Schreibpause. Deine Eingabe bleibt dabei unverändert.</p>
+    <dl class="help-list"><div><dt>Minify</dt><dd>Der Schalter ist beim Öffnen ausgeschaltet. Eingeschaltet wird jeder Formatierungsvorgang zur Minifizierung, auch bei Dateiimport und Live-Eingabe. Notwendige Leerzeichen und Einrückungen bleiben erhalten; Bezeichner werden nicht umbenannt.</dd></div><div><dt>Automatische Erkennung</dt><dd>Dateiendungen und typische Sprachmerkmale helfen bei der Auswahl. Bei kurzen oder mehrdeutigen Ausschnitten kannst du die Sprache selbst festlegen.</dd></div><div><dt>Fehleranzeige</dt><dd>Parserfehler werden mit Zeile und Spalte angezeigt, sofern der Parser eine Position liefert. Die Formatierung ist keine vollständige Codeanalyse. MySQL erhält eine Formatierungsprüfung, keine Datenbankvalidierung. DELIMITER und Stored Procedures werden nicht unterstützt.</dd></div><div><dt>Python</dt><dd>Der Python-Formatter Black lädt beim ersten Einsatz eine zusätzliche Browser-Laufzeit. Das kann einen Moment dauern. Im normalen Formatierungsmodus verwendet Black vier Leerzeichen; die Einrückungseinstellung gilt hier nicht. Minify entfernt überflüssigen Leerraum und behält notwendige Python-Einrückungen bei. Dein Python-Code wird nicht ausgeführt.</dd></div><div><dt>Browser & Datenschutz</dt><dd>Dein Code wird lokal verarbeitet und nicht an einen Formatierungsserver gesendet. Externe Bibliotheken werden bei Bedarf über CDN geladen; dafür ist Internet nötig. Es werden keine Codeeingaben dauerhaft gespeichert. Dateien bis 1 MiB werden unterstützt.</dd></div></dl>
+    <div class="shortcut-list"><span><kbd class="cmd-key">Ctrl</kbd> + <kbd>Enter</kbd> Formatieren</span><span><kbd class="cmd-key">Ctrl</kbd> + <kbd>O</kbd> Datei öffnen</span><span><kbd>Tab</kbd> Einrücken</span><span><kbd>Esc</kbd>, dann <kbd>Tab</kbd> Eingabe verlassen</span></div>
+    <p class="library-note">Mit Prettier, SQL Formatter, Black / Pyodide, sprachspezifischen Minifiern und highlight.js. Syntaxfarben dienen der Lesbarkeit und ersetzen keine Prüfung.</p>
+    <button class="button button-primary" id="gotItButton">Alles klar <span data-icon="check"></span></button>
+  </dialog>
+  <noscript><div class="noscript-message">Bitte aktiviere JavaScript, um den Code-Formatter zu verwenden.</div></noscript>
+  <script>
+(function (root) {
+  'use strict';
+
+  const labels = Object.freeze({
+    html: 'HTML', css: 'CSS', javascript: 'JavaScript', mysql: 'MySQL',
+    php: 'PHP', python: 'Python', json: 'JSON'
+  });
+  const extensions = Object.freeze({
+    html: 'html', css: 'css', javascript: 'js', mysql: 'sql',
+    php: 'php', python: 'py', json: 'json'
+  });
+  const extensionLanguages = Object.freeze({
+    html: 'html', htm: 'html', xhtml: 'html', css: 'css',
+    js: 'javascript', mjs: 'javascript', cjs: 'javascript', jsx: 'javascript',
+    sql: 'mysql', mysql: 'mysql', php: 'php', phtml: 'php',
+    py: 'python', pyw: 'python', json: 'json'
+  });
+
+  function result(language, confidence, source, reason) {
+    return { language, confidence, source, reason };
+  }
+
+  function detect(code, filename = '') {
+    const file = String(filename || '').split(/[\\/]/).pop();
+    const extension = file.includes('.') ? file.split('.').pop().toLowerCase() : '';
+    if (extensionLanguages[extension]) {
+      const language = extensionLanguages[extension];
+      return result(language, 'high', 'extension', `Dateiendung .${extension}`);
+    }
+
+    const text = String(code == null ? '' : code).replace(/^\uFEFF/, '').trim();
+    if (!text) return result(null, 'low', 'ambiguous', 'Code eingeben oder eine Datei öffnen.');
+
+    // This is deliberately a heuristic, never eval or execution of user input.
+    // A valid JSON document is a less ambiguous match than JavaScript syntax.
+    try {
+      JSON.parse(text);
+      return result('json', 'high', 'content', 'Gültige JSON-Struktur');
+    } catch (_) { /* Continue with syntax clues, including incomplete input. */ }
+
+    if (/<\?(?:php\b|=)/i.test(text) && !/^(?:const|let|var|(?:async\s+)?function|export|import)\b/.test(text)) {
+      return result('php', 'high', 'content', 'PHP-Öffnungstag erkannt');
+    }
+
+    // Limit heuristic scanning for large files; the formatter receives all input.
+    const head = text.slice(0, 60000);
+    const start = head.replace(/^(?:(?:\s*\/\*[\s\S]*?\*\/)|(?:\s*\/\/[^\n]*(?:\n|$))|(?:\s*--[^\n]*(?:\n|$))|(?:\s*#(?:[ \t]|!)[^\n]*(?:\n|$))|(?:\s*<!--[\s\S]*?-->))*/, '').trimStart();
+    const scores = { html: 0, css: 0, javascript: 0, mysql: 0, php: 0, python: 0, json: 0 };
+    const reasons = {};
+    const clue = (language, score, reason) => {
+      scores[language] += score;
+      if (!reasons[language] || score >= 6) reasons[language] = reason;
+    };
+
+    if (/^<!doctype\s+html\b/i.test(start)) clue('html', 16, 'HTML-Dokumenttyp erkannt');
+    if (/^<(?:html|head|body|main|section|article|header|footer|nav|div|span|p|a|button|form|input|img|ul|ol|li|table|style|script|template|svg|h[1-6])(?:\s|\/?>)/i.test(start)) {
+      clue('html', 9, 'HTML-Elemente erkannt');
+    }
+    if (/^<!--[\s\S]*?-->/i.test(head)) clue('html', 6, 'HTML-Kommentar erkannt');
+    if (/^<[A-Za-z][\w:.-]*(?:\s[^<>]*?)?>[\s\S]*<\/[A-Za-z][\w:.-]*\s*>/.test(start)) {
+      clue('html', 8, 'Öffnende und schließende HTML-Tags');
+    }
+
+    if (/^(?:SELECT\b[\s\S]*?(?:\bFROM\b|\d|['"`(])|INSERT\s+(?:IGNORE\s+)?INTO\b|UPDATE\s+\S+[\s\S]*?\bSET\b|DELETE\s+FROM\b|REPLACE\s+INTO\b|(?:CREATE|ALTER|DROP|TRUNCATE)\s+(?:TEMPORARY\s+)?(?:TABLE|DATABASE|SCHEMA|VIEW|INDEX|PROCEDURE|FUNCTION|TRIGGER)\b|WITH\s+(?:RECURSIVE\s+)?[\w`]+\s+AS\s*\()/i.test(start)) {
+      clue('mysql', 12, 'SQL-Anweisung erkannt · MySQL-Dialekt');
+    }
+    if (/^(?:EXPLAIN\s+(?:SELECT|UPDATE|DELETE)|SHOW\s+(?:TABLES|DATABASES|COLUMNS|CREATE)|USE\s+[`\w]+\s*;|START\s+TRANSACTION\b|SET\s+(?:@@|SESSION\b|GLOBAL\b))/i.test(start)) {
+      clue('mysql', 10, 'MySQL-Anweisung erkannt');
+    }
+
+    if (/^#![^\n]*\bpython[\d.]*/i.test(head)) clue('python', 15, 'Python-Shebang erkannt');
+    if (/(?:^|\n)\s*(?:async\s+)?def\s+[A-Za-z_]\w*\s*\([^\n]*\)\s*(?:->\s*[^:\n]+)?\s*:/m.test(head)) {
+      clue('python', 12, 'Python-Funktionsdefinition erkannt');
+    }
+    if (/(?:^|\n)\s*class\s+[A-Za-z_]\w*(?:\([^\n]*\))?\s*:/m.test(head)) clue('python', 10, 'Python-Klasse erkannt');
+    if (/(?:^|\n)\s*(?:from\s+[.\w]+\s+import\s+|import\s+[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*(?:\s+as\s+\w+)?\s*(?:,|\n|$))/m.test(head)) {
+      clue('python', 9, 'Python-Import erkannt');
+    }
+    if (/(?:^|\n)\s*(?:if|elif|while|for|with|except|match|case)\b[^\n]*:\s*(?:#.*)?(?:\n|$)/m.test(head)) clue('python', 7, 'Python-Block mit Einrückung');
+    if (/(?:^|\n)\s*(?:print|len|range|enumerate|isinstance)\s*\(/m.test(head)) clue('python', 6, 'Typischer Python-Funktionsaufruf');
+    if (/(?:^|\n)\s*\w+\s*=\s*(?:True|False|None)\b/m.test(head)) clue('python', 7, 'Python-Wert erkannt');
+    if (/\b(?:True|False|None)\b/.test(head) && /(?:^|\n)\s*\w+\s*=/.test(head)) clue('python', 2, 'Python-Werte erkannt');
+    if (/^\{\s*'(?:[^'\\]|\\.)*'\s*:/.test(start)) clue('python', 4, 'Möglicherweise ein Python-Dictionary');
+
+    if (/(?:^|[;\n])\s*(?:(?:export\s+)?(?:const|let|var)\s+[A-Za-z_$[{]|(?:export\s+(?:default\s+)?)?(?:async\s+)?function\b)/m.test(head)) {
+      clue('javascript', 12, 'JavaScript-Deklaration erkannt');
+    }
+    if (/(?:^|\n)\s*(?:import\s+(?:['"{*]|[\w$]+(?:\s*,[^;\n]*)?\s+from\s+['"])|export\s+(?:default\b|\{|class\b))/m.test(head)) clue('javascript', 11, 'JavaScript-Modulsyntax erkannt');
+    if (/\([^\n]*\)\s*=>|\b[A-Za-z_$][\w$]*\s*=>/.test(head)) clue('javascript', 9, 'JavaScript-Pfeilfunktion erkannt');
+    if (/(?:^|[;\n])\s*(?:console\.(?:log|warn|error|info)|document\.(?:querySelector|getElementById|addEventListener)|window\.\w+)\s*\(/m.test(head)) {
+      clue('javascript', 9, 'JavaScript-Browser-API erkannt');
+    }
+    if (/^\s*(?:async\s+)?(?:function|class)\s+[\w$]+[^\n]*\{/.test(start)) clue('javascript', 10, 'JavaScript-Funktion oder Klasse');
+    if (/(?:^|[;\n])\s*(?:if|for|while|switch)\s*\([^\n]*\)\s*\{/m.test(head)) clue('javascript', 7, 'JavaScript-Kontrollstruktur');
+    if (/^\{\s*(?:[A-Za-z_$][\w$]*|'(?:[^'\\]|\\.)*')\s*:/.test(start)) clue('javascript', 4, 'Möglicherweise ein JavaScript-Objekt');
+
+    if (/(?:^|[;\n])\s*\$[A-Za-z_]\w*\s*=/.test(head)) clue('php', 9, 'PHP-Variable erkannt');
+    if (/\$[A-Za-z_]\w*\s*->\s*[A-Za-z_]\w*/.test(head)) clue('php', 10, 'PHP-Objektzugriff erkannt');
+    if (/(?:^|[;\n{])\s*(?:echo|require_once|include_once|namespace)\s+/.test(head)) clue('php', 8, 'PHP-Schlüsselwort erkannt');
+
+    if (/^@(?:charset|import|media|supports|font-face|keyframes|layer|container|property|scope)\b/i.test(start)) {
+      clue('css', 11, 'CSS-Regel erkannt');
+    }
+    if (/(?:^|})\s*(?:[.#][\w-]+|\[[^\]\n]+\]|:[\w-]+|&)[^{};=]*\{/.test(start)) clue('css', 9, 'CSS-Selektor erkannt');
+    if (/^[a-zA-Z][\w-]*(?:\s*[,>+~.#:\[][^{]*)?\s*\{/.test(start) && !/^(?:function|class|const|let|var|if|for|while|switch)\b/.test(start)) {
+      clue('css', 5, 'Möglicher CSS-Selektor');
+    }
+    if (/(?:[{;]\s*)(?:--[\w-]+|(?:background|border|font|margin|padding|grid|flex|align|justify|text|line|box|animation|transition|transform|position|display|color|width|height|opacity|overflow|gap)(?:-[\w-]+)?)\s*:[^{}]+/.test(head)) {
+      clue('css', 5, 'CSS-Eigenschaften erkannt');
+    }
+
+    // Keep recognizing JSON while it is being typed or when it has a syntax error.
+    if (/^[\[{]/.test(start) && /(?:[{,]\s*)"(?:[^"\\]|\\.)*"\s*:/.test(start)) {
+      clue('json', 9, 'JSON-Struktur erkannt; Syntax wird geprüft');
+    }
+    if (/^\[\s*(?:\{|\[|"|-?\d|true\b|false\b|null\b)/.test(start)) clue('json', 5, 'Möglicherweise ein JSON-Array');
+
+    // Strong initial markup is HTML even if its script/style children contain code.
+    if (scores.html >= 9 && /^<(?:!doctype\b|[A-Za-z])/i.test(start)) {
+      return result('html', 'high', 'content', reasons.html);
+    }
+
+    const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const [language, score] = ranked[0];
+    const runnerUp = ranked[1][1];
+    if (score < 6 || (score < 10 && score - runnerUp < 3)) {
+      return result(null, 'low', 'ambiguous', 'Sprache nicht eindeutig. Bitte manuell auswählen.');
+    }
+    return result(language, score >= 10 && score - runnerUp >= 4 ? 'high' : 'medium', 'content', reasons[language]);
+  }
+
+  const samples = Object.freeze({
+    html: '<!DOCTYPE html>\n<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Gute Ideen, klarer Code</title></head><body><main class="workspace"><header><span class="eyebrow">DEIN NÄCHSTES PROJEKT</span><h1>Platz für gute Ideen.</h1><p>Ein kleiner Anfang. Viele Möglichkeiten.</p></header><section class="projects"><article class="card"><h2>Studio Website</h2><p>Design, das einfach funktioniert.</p><a href="#details">Projekt ansehen</a></article><article class="card"><h2>Dashboard</h2><p>Alles Wichtige an einem Ort.</p><a href="#details">Projekt ansehen</a></article></section></main></body></html>',
+    css: ':root{--surface:#171923;--accent:#b7f36b;--text:#f3f4f6;}body{margin:0;background:#101218;color:var(--text);font-family:system-ui,sans-serif;}.workspace{max-width:1100px;margin:0 auto;padding:48px 24px;}.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}.card{padding:28px;border:1px solid #2a2d38;border-radius:16px;background:var(--surface);}.card:hover{border-color:var(--accent);transform:translateY(-2px);}@media(max-width:640px){.projects{grid-template-columns:1fr;}}',
+    javascript: 'const projects=[\n{name:"Studio Website",status:"active",hours:12},\n  {name:"Dashboard",status:"active",hours:8},\n{name:"Brand Guidelines",status:"done",hours:6}];\n\nfunction getOverview(items){\nconst active=items.filter((project)=>project.status==="active");\n  return{count:active.length,\ntotalHours:active.reduce((sum,project)=>sum+project.hours,0),\nprojects:active.map(({name,hours})=>({name,estimate:`${hours} h`}))};\n}\nconst overview=getOverview(projects);\nconsole.log("Dein Projektüberblick",overview);',
+    mysql: "select p.id,p.name,p.status,count(t.id) as task_count,sum(case when t.completed=1 then 1 else 0 end) as completed_tasks from projects as p left join tasks as t on t.project_id=p.id where p.archived=0 and p.created_at>='2026-01-01' group by p.id,p.name,p.status having count(t.id)>0 order by completed_tasks desc,p.name asc limit 20;",
+    php: '<?php\n$projects=[["name"=>"Studio Website","hours"=>12],["name"=>"Dashboard","hours"=>8],["name"=>"Brand Guidelines","hours"=>6]];function summarizeProjects(array $projects):array{$totalHours=array_sum(array_column($projects,"hours"));return["count"=>count($projects),"total_hours"=>$totalHours,"projects"=>array_map(fn(array $project):string=>$project["name"]." · ".$project["hours"]." h",$projects)];}$overview=summarizeProjects($projects);echo json_encode($overview,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);',
+    python: 'from dataclasses import dataclass\n\n@dataclass\nclass Project:\n    name:str\n    hours:int\n    active:bool=True\n\ndef summarize_projects(projects:list[Project])->dict:\n    active=[project for project in projects if project.active]\n    return {"count":len(active),"total_hours":sum(project.hours for project in active),"projects":[{"name":project.name,"estimate":f"{project.hours} h"} for project in active]}\n\nprojects=[Project("Studio Website",12),Project("Dashboard",8),Project("Brand Guidelines",6,False)]\noverview=summarize_projects(projects)\nprint(overview)\n',
+    json: '{"workspace":"Studio","theme":"dark","settings":{"autoFormat":true,"indentation":2,"lineWidth":80},"projects":[{"id":1,"name":"Studio Website","status":"active","tags":["design","frontend"]},{"id":2,"name":"Dashboard","status":"planned","tags":["data","ui"]}],"lastOpened":null}'
+  });
+
+  root.CodeDetect = Object.freeze({ detect, samples, labels, extensions });
+})(typeof window !== 'undefined' ? window : globalThis);
+
+  </script>
+  <script>
+/* Syntax colors only. Source text is never interpreted as page markup. */
+(function () {
+  'use strict';
+
+  const VERSION = '11.11.1';
+  const CDN = [
+    'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/' + VERSION + '/',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@' + VERSION + '/build/'
+  ];
+  const GRAMMARS = {
+    html: 'xml',
+    css: 'css',
+    javascript: 'javascript',
+    mysql: 'sql',
+    php: 'php',
+    python: 'python',
+    json: 'json'
+  };
+  let bundlePromise;
+  let retryAfter = 0;
+  const grammarPromises = new Map();
+
+  function escape(code) {
+    return String(code == null ? '' : code)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function script(url) {
+    return new Promise(function (resolve, reject) {
+      const element = document.createElement('script');
+      let done = false;
+      const finish = function (error) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        element.onload = element.onerror = null;
+        if (error) {
+          element.remove();
+          reject(error);
+        } else {
+          resolve();
+        }
+      };
+      const timer = setTimeout(function () {
+        finish(new Error('Die Syntaxfarben konnten nicht geladen werden.'));
+      }, 12000);
+      element.async = true;
+      element.crossOrigin = 'anonymous';
+      element.referrerPolicy = 'no-referrer';
+      element.onload = function () { finish(); };
+      element.onerror = function () { finish(new Error('CDN nicht erreichbar.')); };
+      element.src = url;
+      document.head.appendChild(element);
+    });
+  }
+
+  async function fromCDN(path) {
+    let lastError;
+    for (const base of CDN) {
+      try {
+        await script(base + path);
+        return;
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  async function ready() {
+    if (window.hljs && typeof window.hljs.highlight === 'function') return window.hljs;
+    if (Date.now() < retryAfter) throw new Error('Syntaxfarben vorübergehend nicht verfügbar.');
+    if (!bundlePromise) {
+      bundlePromise = (async function () {
+        try {
+          await fromCDN('highlight.min.js');
+          if (!window.hljs || typeof window.hljs.highlight !== 'function') {
+            throw new Error('Syntaxfarben nicht verfügbar.');
+          }
+          window.hljs.safeMode();
+          return window.hljs;
+        } catch (error) {
+          bundlePromise = null;
+          retryAfter = Date.now() + 30000;
+          throw error;
+        }
+      })();
+    }
+    return bundlePromise;
+  }
+
+  async function grammar(hljs, name) {
+    if (hljs.getLanguage(name)) return;
+    if (!grammarPromises.has(name)) {
+      const promise = fromCDN('languages/' + name + '.min.js').then(function () {
+        if (!hljs.getLanguage(name)) throw new Error('Sprachfarben nicht verfügbar.');
+      }).catch(function (error) {
+        grammarPromises.delete(name);
+        throw error;
+      });
+      grammarPromises.set(name, promise);
+    }
+    await grammarPromises.get(name);
+  }
+
+  async function highlight(code, language) {
+    code = String(code == null ? '' : code);
+    const plain = { html: escape(code), highlighted: false };
+    if (!code || !Object.prototype.hasOwnProperty.call(GRAMMARS, language)) return plain;
+    // Large documents remain fully usable without a costly colorization pass.
+    if (code.length > 300000) return Object.assign(plain, { reason: 'Bei großen Dateien werden Syntaxfarben deaktiviert.' });
+    try {
+      const hljs = await ready();
+      let name = GRAMMARS[language];
+      await grammar(hljs, name);
+      // php-template delegates embedded tags to XML and PHP to its own grammar.
+      if (language === 'php' && /<\?(?:php\b|=)/i.test(code)) {
+        try {
+          await grammar(hljs, 'xml');
+          await grammar(hljs, 'php-template');
+          name = 'php-template';
+        } catch (_) {
+          // The PHP grammar still provides useful highlighting on its own.
+        }
+      }
+      const result = hljs.highlight(code, { language: name, ignoreIllegals: true });
+      if (result.errorRaised) return plain;
+      return { html: result.value, highlighted: true };
+    } catch (_) {
+      return Object.assign(plain, { reason: 'Syntaxfarben konnten nicht geladen werden. Der Code bleibt verfügbar.' });
+    }
+  }
+
+  window.CodeHighlight = Object.freeze({ highlight: highlight, escape: escape, version: VERSION });
+})();
+
+  </script>
+  <script>
+/* Prettycode formatter engine. Pinned CDN libraries run in isolated workers. */
+(() => {
+  'use strict';
+
+  function formatterWorker() {
+    'use strict';
+    const PRETTIER = '3.6.2';
+    const PHP = '0.24.0';
+    const SQL = '15.6.10';
+    const PYODIDE = '0.27.7';
+    const BLACK = '25.1.0';
+    const TERSER = '5.43.1';
+    const CSSTREE = '3.1.0';
+    const PYTHON_MINIFIER = '3.1.0';
+    const loaded = new Set();
+    let pythonPromise = null;
+    let pythonMinifierPromise = null;
+    let busy = false;
+    let waiting = null;
+
+    function report(id, message) {
+      self.postMessage({ id, type: 'progress', message });
+    }
+
+    function loadPackageScript(path, label, id) {
+      if (loaded.has(path)) return;
+      report(id, label + ' wird geladen …');
+      let failure;
+      for (const origin of ['https://cdn.jsdelivr.net/npm/', 'https://unpkg.com/']) {
+        try {
+          importScripts(origin + path);
+          loaded.add(path);
+          return;
+        } catch (error) {
+          failure = error;
+        }
+      }
+      const error = new Error(label + ' konnte nicht vom CDN geladen werden. Bitte Internetverbindung prüfen und erneut formatieren.');
+      error.kind = 'dependency';
+      error.cause = failure;
+      throw error;
+    }
+
+    function loadPrettier(language, id) {
+      loadPackageScript('prettier@' + PRETTIER + '/standalone.js', 'Prettier', id);
+      const names = language === 'html' || language === 'php'
+        ? ['babel', 'estree', 'html', 'postcss']
+        : language === 'css' ? ['postcss'] : ['babel', 'estree'];
+      for (const name of names) {
+        loadPackageScript('prettier@' + PRETTIER + '/plugins/' + name + '.js', 'Sprachmodul', id);
+      }
+      if (language === 'php') {
+        loadPackageScript('@prettier/plugin-php@' + PHP + '/standalone.js', 'PHP-Formatter', id);
+      }
+    }
+
+    function locateJsonError(error, source) {
+      const lc = String(error.message).match(/line\s+(\d+)\s+column\s+(\d+)/i);
+      if (lc) {
+        error.line = Number(lc[1]);
+        error.column = Number(lc[2]);
+        return;
+      }
+      const pos = String(error.message).match(/position\s+(\d+)/i);
+      const position = pos ? Number(pos[1]) : /end of JSON/i.test(error.message) ? source.length : null;
+      if (position !== null) {
+        const before = source.slice(0, position).split('\n');
+        error.line = before.length;
+        error.column = before[before.length - 1].length + 1;
+      }
+    }
+
+    function javascriptNeedsModule(node, functionScope = false) {
+      if (!node || typeof node !== 'object') return false;
+      if (Array.isArray(node)) return node.some(item => javascriptNeedsModule(item, functionScope));
+      if (/^(?:ImportDeclaration|ExportNamedDeclaration|ExportDefaultDeclaration|ExportAllDeclaration)$/.test(node.type)) return true;
+      if (!functionScope && (node.type === 'AwaitExpression' || (node.type === 'ForOfStatement' && node.await))) return true;
+      if (node.type === 'MetaProperty' && node.meta && node.meta.name === 'import') return true;
+      // Await inside a function does not make the enclosing script a module.
+      // Computed method names/decorators are evaluated in the outer scope.
+      const opensFunction = /Function|Method/.test(node.type || '');
+      return Object.keys(node).some(key => !['loc', 'start', 'end', 'tokens', 'comments', 'extra'].includes(key)
+        && javascriptNeedsModule(node[key], functionScope || (opensFunction && key !== 'key' && key !== 'decorators')));
+    }
+
+    async function minifyJavaScript(source, id) {
+      loadPackageScript('terser@' + TERSER + '/dist/bundle.min.js', 'JavaScript-Minifier', id);
+      const parsed = self.prettierPlugins.babel.parsers.babel.parse(source);
+      try {
+        const result = await self.Terser.minify(source, {
+          compress: false,
+          mangle: false,
+          ecma: 2022,
+          module: javascriptNeedsModule(parsed.program || parsed),
+          keep_fnames: true,
+          keep_classnames: true,
+          format: { beautify: false, comments: 'some', semicolons: true, quote_style: 3, inline_script: false },
+        });
+        return result.code;
+      } catch (error) {
+        if (Number.isInteger(error.col)) error.column = error.col + 1;
+        throw error;
+      }
+    }
+
+    function minifyCSS(source, id) {
+      loadPackageScript('css-tree@' + CSSTREE + '/dist/csstree.js', 'CSS-Minifier', id);
+      const ast = self.csstree.parse(source, { positions: true, onParseError(error) { throw error; } });
+      return self.csstree.generate(ast);
+    }
+
+    /* Worker-local HTML/JSON helpers. No submitted code is executed. */
+
+    function minifyJSON(source) {
+      source = String(source);
+      try {
+        // Validate only; serializing the parsed value would lose duplicate keys,
+        // large integer precision, negative zero, and original number spellings.
+        JSON.parse(source);
+      } catch (error) {
+        if (typeof locateJsonError === 'function') locateJsonError(error, source);
+        error.kind = 'syntax';
+        throw error;
+      }
+
+      const parts = [];
+      let inString = false;
+      let escaped = false;
+      let segmentStart = 0;
+      for (let index = 0; index < source.length; index++) {
+        const char = source[index];
+        if (inString) {
+          if (escaped) escaped = false;
+          else if (char === '\\') escaped = true;
+          else if (char === '"') inString = false;
+        } else if (char === '"') {
+          inString = true;
+        } else if (char === ' ' || char === '\t' || char === '\r' || char === '\n') {
+          parts.push(source.slice(segmentStart, index));
+          segmentStart = index + 1;
+        }
+      }
+      parts.push(source.slice(segmentStart));
+      return parts.join('');
+    }
+
+    // Scan markup boundaries while respecting attribute quotes and comments.
+    // This scanner only isolates verbatim regions; HTML minification is performed
+    // by the established HTMLMinifier parser, never by replacing tag-like regexes.
+    function readMinifyHTMLToken(source, start) {
+      if (source[start] !== '<') return null;
+      if (source.startsWith('<!--', start)) {
+        const close = source.indexOf('-->', start + 4);
+        return { start, end: close < 0 ? source.length : close + 3, kind: 'comment' };
+      }
+      if (source.startsWith('<![CDATA[', start)) {
+        const close = source.indexOf(']]>', start + 9);
+        return { start, end: close < 0 ? source.length : close + 3, kind: 'declaration' };
+      }
+      if (source.startsWith('<?', start)) {
+        const close = source.indexOf('?>', start + 2);
+        return { start, end: close < 0 ? source.length : close + 2, kind: 'processing' };
+      }
+      let index = start + 1;
+      let closing = false;
+      if (source[index] === '/') { closing = true; index++; }
+      const nameStart = index;
+      while (index < source.length && /[A-Za-z0-9:_-]/.test(source[index])) index++;
+      const name = source.slice(nameStart, index).toLowerCase();
+      if (!name && source[index] !== '!') return null;
+      let quote = '';
+      for (; index < source.length; index++) {
+        const char = source[index];
+        if (quote) {
+          if (char === quote) quote = '';
+        } else if (char === '"' || char === "'") {
+          quote = char;
+        } else if (char === '>') {
+          return { start, end: index + 1, kind: name ? 'tag' : 'declaration', name, closing,
+            selfClosing: /\/\s*>$/.test(source.slice(start, index + 1)),
+            raw: source.slice(start, index + 1) };
+        }
+      }
+      return { start, end: source.length, kind: 'incomplete', name, closing, raw: source.slice(start) };
+    }
+
+    function protectMinifyHTML(source) {
+      let markerPrefix = 'prettycode-verbatim-';
+      while (source.includes(markerPrefix)) markerPrefix += 'x';
+      const protectedParts = [];
+      const output = [];
+      let copied = 0;
+      let index = 0;
+      const lowerSource = source.toLowerCase();
+      const rawText = new Set(['script', 'style', 'textarea', 'xmp', 'iframe', 'noembed', 'noframes', 'noscript']);
+      const preserveElements = new Set(['pre', 'textarea', 'script', 'style', 'svg', 'math', 'template', 'xmp', 'listing', 'plaintext', 'iframe', 'noembed', 'noframes', 'noscript']);
+      function rawEnd(name, from) {
+        let close = lowerSource.indexOf('</' + name, from);
+        while (close >= 0) {
+          const boundary = source[close + name.length + 2];
+          if (/[\t\n\f\r />]/.test(boundary || '')) {
+            const closing = readMinifyHTMLToken(source, close);
+            if (closing && closing.kind === 'tag' && closing.closing && closing.name === name) return closing.end;
+          }
+          close = lowerSource.indexOf('</' + name, close + 2);
+        }
+        return source.length;
+      }
+
+      while (index < source.length) {
+        const next = source.indexOf('<', index);
+        if (next < 0) break;
+        const token = readMinifyHTMLToken(source, next);
+        if (!token) { index = next + 1; continue; }
+        index = token.end;
+        if (token.kind !== 'tag' || token.closing || token.selfClosing) continue;
+        const explicitPreserve = /\bxml:space\s*=\s*(?:"preserve"|'preserve'|preserve(?:\s|>))/i.test(token.raw)
+          || /\bstyle\s*=\s*(?:"[^"]*\bwhite-space\s*:[^"]*"|'[^']*\bwhite-space\s*:[^']*')/i.test(token.raw);
+        if (!preserveElements.has(token.name) && !explicitPreserve) continue;
+
+        let end = token.end;
+        let depth = 1;
+        if (rawText.has(token.name)) {
+          end = rawEnd(token.name, end);
+          depth = 0;
+        }
+        if (token.name === 'plaintext') {
+          end = source.length;
+          depth = 0;
+        }
+        while (depth && end < source.length) {
+          const innerStart = source.indexOf('<', end);
+          if (innerStart < 0) { end = source.length; break; }
+          const inner = readMinifyHTMLToken(source, innerStart);
+          if (!inner) { end = innerStart + 1; continue; }
+          end = inner.end;
+          // A raw-text child can contain strings resembling its parent's end tag.
+          if (inner.kind === 'tag' && !inner.closing && rawText.has(inner.name)) {
+            end = rawEnd(inner.name, inner.end);
+            continue;
+          }
+          if (inner.kind === 'tag' && inner.name === token.name) {
+            if (inner.closing) depth--;
+            else if (!inner.selfClosing) depth++;
+          }
+        }
+        // Preserve even incomplete regions; a prior HTML parse provides diagnostics.
+        const original = source.slice(token.start, end);
+        const marker = '<!--' + markerPrefix + protectedParts.length + '-->';
+        protectedParts.push({ marker, original });
+        output.push(source.slice(copied, token.start), marker);
+        copied = end;
+        index = end;
+      }
+      output.push(source.slice(copied));
+      return {
+        source: output.join(''),
+        markerPrefix,
+        restore(value) {
+          for (const part of protectedParts) value = value.replace(part.marker, () => part.original);
+          return value;
+        }
+      };
+    }
+
+    // Version 7 normalizes certain attribute values even with optimization disabled.
+    // Temporarily replace values, then restore their exact spelling and quote type.
+    function protectMinifyHTMLAttributes(source) {
+      let prefix = '__prettycode_attr_';
+      while (source.includes(prefix)) prefix += 'x';
+      const values = [];
+      const output = [];
+      let copied = 0;
+      let index = 0;
+      while (index < source.length) {
+        const next = source.indexOf('<', index);
+        if (next < 0) break;
+        const token = readMinifyHTMLToken(source, next);
+        if (!token) { index = next + 1; continue; }
+        index = token.end;
+        if (token.kind !== 'tag' || token.closing) continue;
+        let cursor = token.start + 1;
+        while (cursor < token.end && !/[\t\n\f\r />]/.test(source[cursor])) cursor++;
+        while (cursor < token.end - 1) {
+          if (source[cursor] !== '=') { cursor++; continue; }
+          cursor++;
+          while (/[\t\n\f\r ]/.test(source[cursor] || '')) cursor++;
+          const valueStart = cursor;
+          const quote = source[cursor];
+          if (quote === '"' || quote === "'") {
+            cursor++;
+            while (cursor < token.end && source[cursor] !== quote) cursor++;
+            if (cursor < token.end) cursor++;
+          } else {
+            while (cursor < token.end - 1 && !/[\t\n\f\r >]/.test(source[cursor])) cursor++;
+          }
+          if (cursor === valueStart) continue;
+          const marker = prefix + values.length + '__';
+          values.push(source.slice(valueStart, cursor));
+          output.push(source.slice(copied, valueStart), '"' + marker + '"');
+          copied = cursor;
+        }
+      }
+      output.push(source.slice(copied));
+      const matcher = new RegExp('(["\']?)' + prefix + '(\\d+)__\\1', 'g');
+      return { source: output.join(''), restore(value) {
+        return value.replace(matcher, (_match, _quote, number) => values[Number(number)]);
+      } };
+    }
+
+    async function minifyHTML(source, id) {
+      source = String(source);
+      // XML is not HTML: removing whitespace can change mixed-content XML data.
+      if (/^\s*<\?xml\b/i.test(source)) {
+        const error = new Error('XML-Dokumente werden im HTML-Minify-Modus nicht unterstützt.');
+        error.kind = 'unsupported';
+        throw error;
+      }
+
+      loadPackageScript('html-minifier-terser@7.2.0/dist/htmlminifier.umd.bundle.min.js', 'HTML-Minifier', id);
+      const protectedMarkup = protectMinifyHTML(source);
+      const protectedAttributes = protectMinifyHTMLAttributes(protectedMarkup.source);
+      // A stylesheet can make any whitespace significant. If that intent is visible
+      // in the document, keep text whitespace throughout rather than guessing scope.
+      const hasWhitespaceCSS = /\bwhite-space\s*:\s*(?:pre(?:-wrap|-line)?|break-spaces)\b/i.test(source);
+      const minified = await self.HTMLMinifier.minify(protectedAttributes.source, {
+        collapseWhitespace: !hasWhitespaceCSS,
+        conservativeCollapse: true,
+        collapseInlineTagWhitespace: false,
+        removeComments: true,
+        // Keep license/directive comments, hydration markers, conditional comments,
+        // and the internal verbatim markers. Ordinary author comments are removed.
+        ignoreCustomComments: [/^!/, /^\s*(?:\[if|<!\[endif|#|\/?ko\b|\/?\$|bindings=|ng-container|ng-content|v-if|v-for)/i, new RegExp('^' + protectedMarkup.markerPrefix)],
+        processConditionalComments: false,
+        removeAttributeQuotes: false,
+        removeRedundantAttributes: false,
+        removeEmptyAttributes: false,
+        removeOptionalTags: false,
+        removeEmptyElements: false,
+        collapseBooleanAttributes: false,
+        decodeEntities: false,
+        caseSensitive: true,
+        keepClosingSlash: true,
+        minifyJS: false,
+        minifyCSS: false,
+        minifyURLs: false,
+        sortAttributes: false,
+        sortClassName: false,
+        useShortDoctype: false,
+        continueOnParseError: false,
+        ignoreCustomFragments: [/<\?[\s\S]*?\?>/, /\{\{[\s\S]*?\}\}/, /<%[\s\S]*?%>/],
+      });
+      return protectedMarkup.restore(protectedAttributes.restore(minified));
+    }
+    /* Worker-safe lexical minifiers; neither function executes submitted source. */
+    function createCodeMinifiers() {
+      'use strict';
+
+      function unsupported(message) {
+        const error = new Error(message);
+        error.kind = 'unsupported';
+        return error;
+      }
+
+      function phpTokens(parser, source) {
+        const tokens = parser.tokenGetAll(source).map(token => Array.isArray(token)
+          ? { type: token[0], text: token[1], line: token[2] }
+          : { type: 'punctuation', text: token });
+        if (tokens.map(token => token.text).join('') !== source) {
+          throw unsupported('Der PHP-Tokenizer kann diesen Ausschnitt nicht verlustfrei verarbeiten. Die Eingabe bleibt unverändert.');
+        }
+        return tokens;
+      }
+
+      function phpSignature(tokens) {
+        return JSON.stringify(tokens.filter(token => token.type !== 'T_WHITESPACE').map(token => [
+          token.type,
+          token.type === 'T_OPEN_TAG' ? token.text.replace(/[\t\r\n ]+$/, '') : token.text
+        ]));
+      }
+
+      function minifyPHP(source, PhpParser) {
+        if (typeof PhpParser !== 'function') throw unsupported('Der PHP-Tokenizer ist nicht verfügbar.');
+        const parser = new PhpParser({ parser: { version: '8.4', extractDoc: true } });
+        source = String(source);
+        // Parse first: the parser understands __halt_compiler and does not lex its
+        // arbitrary binary tail. tokenGetAll() alone would continue into that tail.
+        const parsed = parser.parseCode(source);
+        const nodes = [parsed];
+        while (nodes.length) {
+          const node = nodes.pop();
+          if (!node || typeof node !== 'object') continue;
+          if (node.kind === 'halt') {
+            throw unsupported('PHP mit __halt_compiler() wird nicht minifiziert: Der Datenanhang und seine Byte-Offsets müssen unverändert bleiben.');
+          }
+          for (const value of Object.values(node)) {
+            if (value && typeof value === 'object') nodes.push(value);
+          }
+        }
+        const original = phpTokens(parser, source);
+        if (original.some(token => token.type === 'T_HALT_COMPILER')) {
+          throw unsupported('PHP mit __halt_compiler() wird nicht minifiziert: Der Datenanhang und seine Byte-Offsets müssen unverändert bleiben.');
+        }
+        // __LINE__ is a language constant, so retain all physical line boundaries.
+        const keepLines = original.some(token => token.type === 'T_LINE');
+        const signature = phpSignature(original);
+        const operatorPairs = new Set([
+          '++', '--', '**', '/*', '//', '<<', '>>', '<=', '>=', '==', '!=', '<>',
+          '=>', '+=', '-=', '*=', '/=', '%=', '.=', '&=', '|=', '^=', '&&', '||',
+          '??', '::', '->', '..', '#[', '${'
+        ]);
+        const word = /[A-Za-z0-9_$\u0080-\uFFFF]/;
+        function build(conservative) {
+          let out = '';
+          let gap = '';
+          let previous = null;
+          for (const token of original) {
+            if (token.type === 'T_WHITESPACE') {
+              gap += token.text;
+              continue;
+            }
+            if (gap && previous) {
+              const lines = keepLines ? (gap.match(/\r\n|\r|\n/g) || []).join('') : '';
+              const last = out[out.length - 1];
+              const first = token.text[0];
+              if (lines) out += lines;
+              else if (conservative || (word.test(last || '') && word.test(first || '')) ||
+                (word.test(last || '') && (first === '"' || first === "'")) ||
+                operatorPairs.has((last || '') + (first || '')) ||
+                ((last === '.' && /[0-9]/.test(first || '')) || (/[0-9]/.test(last || '') && first === '.'))) {
+                out += ' ';
+              }
+            }
+            gap = '';
+            // Opening-tag whitespace is part of the lexer token, not trivia.
+            // Closing-tag newline and inline HTML are always retained byte-for-byte.
+            let text = token.text;
+            if (token.type === 'T_OPEN_TAG') {
+              const suffix = text.match(/[\t\r\n ]+$/)?.[0] || '';
+              const lines = keepLines ? (suffix.match(/\r\n|\r|\n/g) || []).join('') : '';
+              text = text.slice(0, text.length - suffix.length) + (lines || (suffix ? ' ' : ''));
+            }
+            out += text;
+            previous = token;
+          }
+          // Preserve trailing line count too, when __LINE__ is observable.
+          if (keepLines && gap) out += (gap.match(/\r\n|\r|\n/g) || []).join('');
+          return out;
+        }
+        for (const conservative of [false, true]) {
+          const candidate = build(conservative);
+          try {
+            const result = phpTokens(parser, candidate);
+            if (phpSignature(result) !== signature) continue;
+            if (keepLines) {
+              const before = original.filter(token => token.type === 'T_LINE').map(token => token.line);
+              const after = result.filter(token => token.type === 'T_LINE').map(token => token.line);
+              if (JSON.stringify(before) !== JSON.stringify(after)) continue;
+            }
+            parser.parseCode(candidate);
+            return candidate;
+          } catch (_) { /* Try the less aggressive spacing mode before refusing. */ }
+        }
+        throw unsupported('Dieser PHP-Ausschnitt lässt sich nicht sicher minifizieren. Kommentare, Zeichenketten und Sprach-Tokens dürfen sich dabei nicht verändern.');
+      }
+
+      const sqlSpace = char => char !== undefined && /[\t\n\r\f\v ]/.test(char);
+      const sqlWord = char => char !== undefined && /[A-Za-z0-9_$\u0080-\uFFFF]/.test(char);
+
+      function sqlTokens(source, mode) {
+        const tokens = [];
+        let i = 0;
+        let lineStart = true;
+        let delimiter = ';';
+        function push(type, start, end) {
+          const text = source.slice(start, end);
+          tokens.push({ type, text });
+          const lastLF = Math.max(text.lastIndexOf('\n'), text.lastIndexOf('\r'));
+          if (lastLF >= 0) lineStart = /^[\t ]*$/.test(text.slice(lastLF + 1));
+          else if (!/^[\t ]*$/.test(text)) lineStart = false;
+          i = end;
+        }
+        while (i < source.length) {
+          const start = i;
+          const char = source[i];
+          if (sqlSpace(char)) {
+            while (i < source.length && sqlSpace(source[i])) i++;
+            push('space', start, i);
+            continue;
+          }
+          if (lineStart && /^DELIMITER(?:[\t ]|$)/i.test(source.slice(i, i + 11))) {
+            let end = i;
+            while (end < source.length && source[end] !== '\n' && source[end] !== '\r') end++;
+            const statement = source.slice(i, end);
+            const nextDelimiter = statement.replace(/^DELIMITER[\t ]*/i, '').trim();
+            if (!nextDelimiter || /[\s'"`\\#]/.test(nextDelimiter) || nextDelimiter.includes('--') || nextDelimiter.includes('/*')) {
+              throw unsupported('Dieser MySQL-DELIMITER wird nicht sicher unterstützt. Verwende beispielsweise ;, $$ oder //.');
+            }
+            delimiter = nextDelimiter;
+            if (source[end] === '\r') end++;
+            if (source[end] === '\n') end++;
+            push('directive', start, end);
+            continue;
+          }
+          if (source.startsWith(delimiter, i)) {
+            push('terminator', start, i + delimiter.length);
+            continue;
+          }
+          if (char === "'" || char === '"' || char === '`') {
+            const quote = char;
+            const isIdentifier = quote === '`' || (quote === '"' && mode.ansiQuotes);
+            let end = i + 1;
+            let closed = false;
+            while (end < source.length) {
+              if (!isIdentifier && mode.backslashEscapes && source[end] === '\\') {
+                end += 2;
+              } else if (source[end] === quote) {
+                if (source[end + 1] === quote) end += 2;
+                else { end++; closed = true; break; }
+              } else end++;
+            }
+            if (!closed) throw new Error('Nicht abgeschlossene MySQL-Zeichenkette oder Kennung.');
+            push(isIdentifier ? 'identifier' : 'string', start, end);
+            continue;
+          }
+          const dashComment = char === '-' && source[i + 1] === '-' &&
+            (i + 2 === source.length || source.charCodeAt(i + 2) <= 32 || source.charCodeAt(i + 2) === 127);
+          if (char === '#' || dashComment) {
+            let end = i + (char === '#' ? 1 : 2);
+            while (end < source.length && source[end] !== '\n' && source[end] !== '\r') end++;
+            push('comment', start, end);
+            continue;
+          }
+          if (char === '/' && source[i + 1] === '*') {
+            const close = source.indexOf('*/', i + 2);
+            if (close < 0) throw new Error('Nicht abgeschlossener MySQL-Kommentar.');
+            const protectedComment = source[i + 2] === '!' || source[i + 2] === '+' ||
+              /^\/\*M!/i.test(source.slice(i, i + 4));
+            push(protectedComment ? 'protected-comment' : 'comment', start, close + 2);
+            continue;
+          }
+          if (sqlWord(char)) {
+            let end = i + 1;
+            while (end < source.length && sqlWord(source[end]) && !source.startsWith(delimiter, end)) end++;
+            push('word', start, end);
+            continue;
+          }
+          // Keep multi-character operators intact, including JSON extraction.
+          const operator = ['->>', '<=>', '!=', '<>', '<=', '>=', ':=', '&&', '||', '<<', '>>', '->', '@@'].find(item => source.startsWith(item, i));
+          push('symbol', start, i + (operator ? operator.length : 1));
+        }
+        return tokens;
+      }
+
+      function sqlSignature(tokens) {
+        return JSON.stringify(tokens.filter(token => token.type !== 'space' && token.type !== 'comment')
+          .map(token => [token.type, token.text]));
+      }
+
+      function minifyMySQL(source) {
+        source = String(source);
+        const modes = [
+          { backslashEscapes: true, ansiQuotes: false },
+          { backslashEscapes: false, ansiQuotes: false },
+          { backslashEscapes: true, ansiQuotes: true },
+          { backslashEscapes: false, ansiQuotes: true }
+        ];
+        const parsed = [];
+        let failure;
+        for (const mode of modes) {
+          try { parsed.push({ mode, tokens: sqlTokens(source, mode) }); }
+          catch (error) {
+            if (error.kind === 'unsupported') throw error;
+            failure = error;
+          }
+        }
+        if (!parsed.length) {
+          if (failure?.kind === 'unsupported') throw failure;
+          const error = new Error(failure?.message || 'MySQL-Eingabe kann nicht tokenisiert werden.');
+          error.kind = 'syntax';
+          throw error;
+        }
+        let out = '';
+        let gap = false;
+        const primary = parsed[0].tokens;
+        const nextVisible = new Array(primary.length);
+        let next = null;
+        for (let index = primary.length - 1; index >= 0; index--) {
+          nextVisible[index] = next;
+          if (primary[index].type !== 'space' && primary[index].type !== 'comment') next = primary[index];
+        }
+        for (let index = 0; index < primary.length; index++) {
+          const token = primary[index];
+          if (token.type === 'space') { gap = true; continue; }
+          if (token.type === 'comment') {
+            // Retain comments between a function name and its opening parenthesis:
+            // MySQL's built-in function parser makes that adjacency significant.
+            const next = nextVisible[index];
+            if (token.text.startsWith('/*') && sqlWord(out[out.length - 1]) && next?.text === '(') {
+              if (gap && out && !/[\r\n]$/.test(out)) out += ' ';
+              out += token.text;
+              gap = false;
+            } else gap = true;
+            continue;
+          }
+          if (token.type === 'directive') {
+            if (out && !/[\r\n]$/.test(out)) out += '\n';
+            out += token.text;
+            gap = false;
+            continue;
+          }
+          if (gap && out && !/[\r\n]$/.test(out)) out += ' ';
+          out += token.text;
+          gap = false;
+        }
+        for (const original of parsed) {
+          let result;
+          try { result = sqlTokens(out, original.mode); }
+          catch (_) { throw unsupported('Dieser MySQL-Ausschnitt ist wegen seiner SQL_MODE-abhängigen Zeichenketten nicht sicher minifizierbar.'); }
+          if (sqlSignature(original.tokens) !== sqlSignature(result)) {
+            throw unsupported('Dieser MySQL-Ausschnitt ist wegen seiner SQL_MODE-abhängigen Zeichenketten nicht sicher minifizierbar.');
+          }
+        }
+        return out;
+      }
+
+      return Object.freeze({ minifyPHP, minifyMySQL });
+    }
+    const codeMinifiers = createCodeMinifiers();
+
+    async function getPython(id) {
+      if (pythonPromise) return pythonPromise;
+      pythonPromise = (async () => {
+        report(id, 'Python wird vorbereitet – beim ersten Mal kann das etwas dauern …');
+        const indexURL = 'https://cdn.jsdelivr.net/pyodide/v' + PYODIDE + '/full/';
+        try {
+          importScripts(indexURL + 'pyodide.js');
+          const python = await self.loadPyodide({ indexURL, stdout() {}, stderr() {} });
+          report(id, 'Python-Formatter Black wird geladen …');
+          await python.loadPackage('micropip');
+          await python.runPythonAsync(`
+import micropip
+await micropip.install([
+    'black==25.1.0', 'click==8.1.7', 'mypy-extensions==1.0.0',
+    'pathspec==0.12.1', 'platformdirs==4.3.8', 'packaging==24.2'
+])
+import ast as _pretty_ast
+import json as _pretty_json
+import black as _pretty_black
+
+def _pretty_format_python(source, width):
+    try:
+        # Parse and compile only. The submitted program is never executed.
+        _pretty_ast.parse(source, filename='<eingabe>', mode='exec')
+        compile(source, '<eingabe>', 'exec', dont_inherit=True)
+        try:
+            formatted = _pretty_black.format_file_contents(
+                source,
+                fast=False,
+                mode=_pretty_black.Mode(line_length=width),
+            )
+        except _pretty_black.NothingChanged:
+            formatted = source
+        return _pretty_json.dumps({'code': formatted})
+    except SyntaxError as error:
+        return _pretty_json.dumps({'error': {
+            'message': error.msg,
+            'line': error.lineno,
+            'column': error.offset,
+            'kind': 'syntax',
+        }})
+    except Exception as error:
+        return _pretty_json.dumps({'error': {
+            'message': str(error),
+            'kind': 'syntax',
+        }})
+`);
+          return python;
+        } catch (cause) {
+          const error = new Error('Python/Black konnte nicht geladen werden. Bitte Internetverbindung prüfen und erneut versuchen.');
+          error.kind = 'dependency';
+          error.cause = cause;
+          throw error;
+        }
+      })().catch(error => {
+        pythonPromise = null;
+        throw error;
+      });
+      return pythonPromise;
+    }
+
+    async function getPythonMinifier(python, id) {
+      if (pythonMinifierPromise) return pythonMinifierPromise;
+      report(id, 'Python-Minifier wird geladen …');
+      pythonMinifierPromise = python.runPythonAsync(`
+await micropip.install('python-minifier==3.1.0')
+import python_minifier as _pretty_python_minifier
+
+def _pretty_minify_python(source):
+    try:
+        # Parsing, compilation and AST comparison never execute the input.
+        original = _pretty_ast.parse(source, filename='<eingabe>', mode='exec')
+        compile(source, '<eingabe>', 'exec', dont_inherit=True)
+        compact = _pretty_python_minifier.minify(
+            source,
+            remove_annotations=False,
+            remove_pass=False,
+            remove_literal_statements=False,
+            combine_imports=False,
+            hoist_literals=False,
+            rename_locals=False,
+            rename_globals=False,
+            remove_object_base=False,
+            convert_posargs_to_args=False,
+            preserve_shebang=True,
+            remove_asserts=False,
+            remove_debug=False,
+            remove_explicit_return_none=False,
+            remove_builtin_exception_brackets=False,
+            constant_folding=False,
+        )
+        output_ast = _pretty_ast.parse(compact, filename='<ausgabe>', mode='exec')
+        compile(compact, '<ausgabe>', 'exec', dont_inherit=True)
+        if _pretty_ast.dump(original, include_attributes=False) != _pretty_ast.dump(output_ast, include_attributes=False):
+            raise ValueError('Die Python-Struktur konnte beim Minifizieren nicht unverändert erhalten werden.')
+        return _pretty_json.dumps({'code': compact})
+    except SyntaxError as error:
+        return _pretty_json.dumps({'error': {
+            'message': error.msg, 'line': error.lineno, 'column': error.offset, 'kind': 'syntax',
+        }})
+    except Exception as error:
+        return _pretty_json.dumps({'error': {'message': str(error), 'kind': 'syntax'}})
+`).catch(cause => {
+        pythonMinifierPromise = null;
+        const error = new Error('Der Python-Minifier konnte nicht geladen werden. Bitte Internetverbindung prüfen und erneut versuchen.');
+        error.kind = 'dependency';
+        error.cause = cause;
+        throw error;
+      });
+      return pythonMinifierPromise;
+    }
+
+    function cleanError(error) {
+      let line = error.line || error.lineNumber || null;
+      let column = error.column || error.columnNumber || null;
+      const position = error.loc && (error.loc.start || error.loc);
+      if (position) {
+        line = line || position.line;
+        column = column || position.column;
+      }
+      const message = String(error.message || error || 'Unbekannter Formatierungsfehler').replace(/\u001b\[[0-9;]*m/g, '');
+      const match = message.match(/line\s+(\d+)(?:\s*,?\s*column\s+(\d+))?/i) || message.match(/\((\d+):(\d+)\)/);
+      if (match) {
+        line = line || Number(match[1]);
+        column = column || Number(match[2]) || null;
+      }
+      return {
+        message,
+        line: Number.isFinite(Number(line)) && Number(line) > 0 ? Number(line) : null,
+        column: Number.isFinite(Number(column)) && Number(column) > 0 ? Number(column) : null,
+        kind: error.kind || 'syntax',
+      };
+    }
+
+    async function run(job) {
+      const { id, language, options = {} } = job;
+      const source = String(job.code ?? '').replace(/^\uFEFF/, '');
+      if (!source.trim()) return { code: '', engine: '', validationNote: '' };
+      const tabWidth = options.tabWidth === 4 ? 4 : 2;
+      const printWidth = [80, 100, 120].includes(options.printWidth) ? options.printWidth : 100;
+
+      if (language === 'python') {
+        const python = await getPython(id);
+        if (options.minify === true) await getPythonMinifier(python, id);
+        report(id, options.minify === true ? 'Python wird minifiziert …' : 'Python wird formatiert …');
+        python.globals.set('_pretty_source', source);
+        python.globals.set('_pretty_width', printWidth);
+        let data;
+        try {
+          data = JSON.parse(python.runPython(options.minify === true ? '_pretty_minify_python(_pretty_source)' : '_pretty_format_python(_pretty_source, _pretty_width)'));
+        } finally {
+          python.globals.delete('_pretty_source');
+          python.globals.delete('_pretty_width');
+        }
+        if (data.error) throw Object.assign(new Error(data.error.message), data.error);
+        return {
+          code: data.code,
+          engine: options.minify === true ? 'Python Minifier ' + PYTHON_MINIFIER : 'Black ' + BLACK,
+          validationNote: options.minify === true
+            ? 'Python 3.12 · Bezeichner, Docstrings und Annotationen bleiben erhalten. Notwendige Zeilenumbrüche bleiben bestehen.'
+            : 'Python 3.12 · Black verwendet 4 Leerzeichen und normalisiert Anführungszeichen.',
+        };
+      }
+
+      if (language === 'mysql') {
+        loadPackageScript('sql-formatter@' + SQL + '/dist/sql-formatter.min.js', 'MySQL-Formatter', id);
+        const code = self.sqlFormatter.format(source, {
+          language: 'mysql',
+          tabWidth,
+          useTabs: Boolean(options.useTabs),
+          keywordCase: 'upper',
+          expressionWidth: printWidth,
+          linesBetweenQueries: 1,
+        });
+        return {
+          code: options.minify === true ? codeMinifiers.minifyMySQL(source) : code.replace(/\s*$/, '\n'),
+          engine: options.minify === true ? 'MySQL Token-Minifier' : 'SQL Formatter ' + SQL,
+          validationNote: 'Formatierungsprüfung, keine vollständige MySQL-Validierung. DELIMITER und Stored Procedures werden nicht unterstützt.',
+        };
+      }
+
+      if (!['html', 'css', 'javascript', 'php', 'json'].includes(language)) {
+        const error = new Error('Bitte eine unterstützte Sprache auswählen.');
+        error.kind = 'dependency';
+        throw error;
+      }
+
+      if (language === 'json') {
+        try { JSON.parse(source); }
+        catch (error) { locateJsonError(error, source); throw error; }
+      }
+
+      loadPrettier(language, id);
+      const parser = { javascript: 'babel', html: 'html', css: 'css', json: 'json', php: 'php' }[language];
+      let phpFragment = false;
+      let input = source;
+      // A .php file may legitimately contain only an HTML/XML template.
+      // Opening tags are needed only for tagless PHP code fragments.
+      const markupOnlyPhp = language === 'php' && !/<\?(?:php\b|=)/i.test(source) && /^\s*</.test(source);
+      if (language === 'php' && !/<\?(?:php\b|=)/i.test(source) && !markupOnlyPhp) {
+        phpFragment = true;
+        input = '<?php\n' + source;
+      }
+      let code;
+      try {
+        code = await self.prettier.format(input, {
+          parser,
+          plugins: self.prettierPlugins,
+          tabWidth,
+          useTabs: Boolean(options.useTabs),
+          printWidth,
+          semi: options.semi !== false,
+          singleQuote: Boolean(options.singleQuote),
+          endOfLine: 'lf',
+          htmlWhitespaceSensitivity: 'css',
+          embeddedLanguageFormatting: 'auto',
+          ...(language === 'php' ? { phpVersion: '8.4' } : {}),
+        });
+      } catch (error) {
+        if (phpFragment) {
+          const detail = cleanError(error);
+          const actualLine = detail.line ? Math.max(1, detail.line - 1) : null;
+          const message = detail.message.split('\n')[0].replace(/on line \d+/i, actualLine ? 'on line ' + actualLine : '');
+          const adjusted = new Error(message);
+          adjusted.line = actualLine;
+          adjusted.column = detail.column;
+          adjusted.kind = detail.kind;
+          throw adjusted;
+        }
+        throw error;
+      }
+      if (options.minify === true) {
+        let engine;
+        let validationNote = '';
+        if (language === 'javascript') {
+          code = await minifyJavaScript(source, id);
+          engine = 'Terser ' + TERSER;
+          validationNote = 'Bezeichner bleiben erhalten; keine Kompressor-Transformationen.';
+        } else if (language === 'css') {
+          code = minifyCSS(source, id);
+          engine = 'CSS Tree ' + CSSTREE;
+          validationNote = 'Regeln und Eigenschaften werden nicht umgeordnet.';
+        } else if (language === 'json') {
+          code = minifyJSON(source);
+          engine = 'JSON Token-Minifier';
+        } else if (language === 'html') {
+          code = await minifyHTML(source, id);
+          engine = 'HTML Minifier Terser 7.2.0';
+          validationNote = 'Konservative Reduktion; geschützte Textbereiche bleiben unverändert.';
+        } else if (language === 'php') {
+          if (markupOnlyPhp) {
+            code = await minifyHTML(source, id);
+            engine = 'HTML Minifier Terser 7.2.0';
+            validationNote = 'PHP-Datei ohne PHP-Blöcke: HTML wurde minifiziert.';
+          } else {
+            const previousProcess = self.process;
+            try {
+              if (!self.process) self.process = { arch: 'x64' };
+              loadPackageScript('php-parser@3.7.0/dist/php-parser.js', 'PHP-Tokenizer', id);
+            } finally {
+              if (previousProcess === undefined) delete self.process;
+              else self.process = previousProcess;
+            }
+            code = codeMinifiers.minifyPHP(input, self.PhpParser);
+            if (phpFragment) code = code.replace(/^<\?php(?:\r\n|[\t \r\n])/, '');
+            engine = 'PHP Token-Minifier';
+            validationNote = 'Bezeichner, Kommentare, Heredocs und HTML-Text bleiben erhalten.';
+          }
+        }
+        return { code, engine, validationNote };
+      }
+      if (phpFragment) code = code.replace(/^<\?php\s*\n/, '');
+      return {
+        code,
+        engine: language === 'php' ? 'Prettier + PHP ' + PHP : 'Prettier ' + PRETTIER,
+        validationNote: language === 'php'
+          ? 'PHP-Parser bis Version 8.4. Gemischte PHP/HTML-Templates bitte nachprüfen.'
+          : language === 'html' ? 'Parserprüfung; keine vollständige HTML-Validierung.'
+            : language === 'css' ? 'Parserprüfung; CSS-Eigenschaften werden nicht semantisch validiert.' : '',
+      };
+    }
+
+    async function process(job) {
+      busy = true;
+      try {
+        const result = await run(job);
+        self.postMessage({ id: job.id, type: 'result', result });
+      } catch (error) {
+        self.postMessage({ id: job.id, type: 'error', error: cleanError(error) });
+      } finally {
+        busy = false;
+        if (waiting) {
+          const next = waiting;
+          waiting = null;
+          process(next);
+        }
+      }
+    }
+
+    self.onmessage = event => {
+      const job = event.data;
+      if (busy) {
+        if (waiting) self.postMessage({ id: waiting.id, type: 'error', error: {
+          message: 'Durch eine neuere Eingabe ersetzt.', kind: 'cancelled', line: null, column: null,
+        } });
+        waiting = job;
+      } else {
+        process(job);
+      }
+    };
+  }
+
+  const pools = new Map();
+  let sequence = 0;
+
+  function dependencyError(message) {
+    const error = new Error(message);
+    error.kind = 'dependency';
+    error.line = null;
+    error.column = null;
+    return error;
+  }
+
+  function destroyPool(key, error) {
+    const pool = pools.get(key);
+    if (!pool) return;
+    pool.worker.terminate();
+    URL.revokeObjectURL(pool.url);
+    for (const pending of pool.pending.values()) {
+      clearTimeout(pending.timer);
+      pending.reject(error);
+    }
+    pool.pending.clear();
+    pools.delete(key);
+  }
+
+  function getPool(key) {
+    if (pools.has(key)) return pools.get(key);
+    if (typeof Worker === 'undefined') throw dependencyError('Dieser Browser unterstützt keine Web Worker. Bitte einen aktuellen Browser verwenden.');
+    const url = URL.createObjectURL(new Blob(['(' + formatterWorker.toString() + ')();'], { type: 'text/javascript' }));
+    let worker;
+    try { worker = new Worker(url); }
+    catch (_) {
+      URL.revokeObjectURL(url);
+      throw dependencyError('Der Browser blockiert den Formatter-Worker. Bitte die Seite über HTTPS oder einen lokalen Webserver öffnen.');
+    }
+    const pool = { worker, url, pending: new Map() };
+    pools.set(key, pool);
+    worker.onmessage = event => {
+      const message = event.data;
+      const pending = pool.pending.get(message.id);
+      if (!pending) return;
+      if (message.type === 'progress') {
+        if (typeof pending.onProgress === 'function') {
+          try { pending.onProgress(message.message); } catch (_) {}
+        }
+        return;
+      }
+      clearTimeout(pending.timer);
+      pool.pending.delete(message.id);
+      if (message.type === 'error') pending.reject(Object.assign(new Error(message.error.message), message.error));
+      else pending.resolve(message.result);
+    };
+    worker.onerror = event => {
+      event.preventDefault();
+      destroyPool(key, dependencyError('Der Formatter konnte nicht gestartet werden. Bitte Internetverbindung und Browser-Einstellungen prüfen und erneut versuchen.'));
+    };
+    return pool;
+  }
+
+  globalThis.CodeEngine = Object.freeze({
+    format(code, language, options = {}, onProgress) {
+      if (!String(code ?? '').trim()) return Promise.resolve({ code: '', engine: '', validationNote: '' });
+      return new Promise((resolve, reject) => {
+        const key = language === 'python' ? 'python' : 'standard';
+        let pool;
+        try { pool = getPool(key); }
+        catch (error) { reject(error); return; }
+        const id = ++sequence;
+        const timer = setTimeout(() => {
+          destroyPool(key, dependencyError('Zeitlimit erreicht. Bitte eine kleinere Datei versuchen oder die CDN-Verbindung prüfen.'));
+        }, key === 'python' ? 180000 : 60000);
+        pool.pending.set(id, { resolve, reject, onProgress, timer });
+        pool.worker.postMessage({ id, code: String(code), language, options });
+      });
+    },
+    dispose() {
+      for (const key of [...pools.keys()]) destroyPool(key, dependencyError('Formatter wurde zurückgesetzt.'));
+    },
+    versions: Object.freeze({ prettier: '3.6.2', php: '0.24.0', sql: '15.6.10', pyodide: '0.27.7', black: '25.1.0', terser: '5.43.1', cssTree: '3.1.0', pythonMinifier: '3.1.0', phpTokenizer: '3.7.0', htmlMinifier: '7.2.0' }),
+  });
+})();
+
+  </script>
+  <script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const icons = {
+    help:'<circle cx="12" cy="12" r="9"/><path d="M9.4 9a2.7 2.7 0 0 1 5.2 1c0 2-2.6 2-2.6 4m0 3h.01"/>',
+    clipboard:'<path d="M9 5H6a2 2 0 0 0-2 2v13h16V7a2 2 0 0 0-2-2h-3"/><rect x="9" y="3" width="6" height="4" rx="1"/>',
+    folder:'<path d="M3 7V5a1 1 0 0 1 1-1h5l2 3h9v3M3 7v13h16l3-10H7l-4 10"/>',
+    sparkles:'<path d="m12 3 2.3 6.7L21 12l-6.7 2.3L12 21l-2.3-6.7L3 12l6.7-2.3L12 3ZM20 2v4m-2-2h4"/>',
+    indent:'<path d="M11 5h10M11 10h10M11 15h10M3 20h18M3 5l4 5-4 5"/>',
+    sliders:'<path d="M4 4v5m0 4v7m8-16v10m0 4v2m8-16v2m0 4v10M1 9h6m2 9h6m2-12h6"/>',
+    wand:'<path d="m4 20 12-12 4 4L8 24" transform="translate(0 -3)"/><path d="m13 8 4 4M5 2v4M3 4h4m14-3v4m-2-2h4M3 13v4m-2-2h4"/>',
+    code:'<path d="m7 6-6 6 6 6m10-12 6 6-6 6m-3-15-4 18"/>',
+    trash:'<path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/>',
+    upload:'<path d="M12 16V3m-5 5 5-5 5 5M4 15v6h16v-6"/>',
+    download:'<path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/>',
+    copy:'<rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/>',
+    expand:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>',
+    'arrow-left':'<path d="M20 12H4m6-6-6 6 6 6"/>',
+    'arrow-up-right':'<path d="M6 18 18 6M6 6h12v12"/>',
+    shield:'<path d="m12 2 8 4v6c0 5-8 10-8 10S4 17 4 12V6l8-4Z"/><path d="m8 12 3 3 5-6"/>',
+    alert:'<path d="m12 3 10 18H2L12 3Zm0 6v5m0 3h.01"/>',
+    check:'<path d="m5 12 4 4L19 6"/>',
+    close:'<path d="m6 6 12 12M6 18 18 6"/>'
+  };
+  document.querySelectorAll('[data-icon]').forEach(el => {
+    el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (icons[el.dataset.icon] || '') + '</svg>';
+  });
+  const source = $('sourceInput');
+  const state = {revision:0, importRevision:0, filename:'', language:null, output:'', valid:false, error:null, timer:null, toastTimer:null, example:'javascript', running:false,sourceLineCount:1,outputLineCount:1};
+  const MAX_BYTES = 1024 * 1024;
+  $('minifyToggle').checked=false;
+  const platform = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? '⌘' : 'Ctrl';
+  document.querySelectorAll('.cmd-key').forEach(el => { el.textContent = platform; });
+  $('fileButton').querySelector('kbd').textContent = platform + ' O';
+  $('formatButton').querySelector('kbd').textContent = platform + ' ↵';
+  $('formatShortcut').textContent = platform + ' ↵';
+
+  function lineCount(text) { return text ? text.split('\n').length - (text.endsWith('\n') ? 1 : 0) : 0; }
+  function numbers(count, errorLine, offset=0) {
+    return Array.from({length:Math.max(1,count)}, (_,index) => index + offset + 1 === errorLine ? '<span class="error-line">'+(index+offset+1)+'</span>' : String(index+offset+1)).join('\n');
+  }
+  function updateInputStats() {
+    const count = source.value ? source.value.split('\n').length : 0;
+    state.sourceLineCount=Math.max(1,count);
+    $('inputStats').textContent = count.toLocaleString('de-DE') + (count === 1 ? ' Zeile' : ' Zeilen') + ' · ' + source.value.length.toLocaleString('de-DE') + ' Zeichen';
+    $('inputPlaceholder').hidden = Boolean(source.value);
+    $('fileBadge').textContent = state.filename || (state.example ? 'Beispiel' : 'Ungespeichert');
+    $('fileBadge').title = state.filename || '';
+    updateCursor();
+    syncInputScroll();
+  }
+  function updateCursor() {
+    const before = source.value.slice(0,source.selectionStart).split('\n');
+    $('cursorPosition').textContent = 'Z '+before.length+', S '+(before[before.length-1].length+1);
+  }
+  function syncInputScroll() {
+    const height=parseFloat(getComputedStyle(source).lineHeight)||23;
+    const first=Math.min(state.sourceLineCount-1,Math.max(0,Math.floor(source.scrollTop/height)-1));
+    const count=Math.min(state.sourceLineCount-first,Math.ceil(source.clientHeight/height)+4);
+    $('inputLines').innerHTML=numbers(count,state.error?.line,first);
+    $('inputLines').style.transform='translateY('+(first*height-source.scrollTop)+'px)';
+  }
+  function syncOutputScroll() {
+    const editor=$('outputEditor'),height=parseFloat(getComputedStyle($('outputCode')).lineHeight)||23;
+    const first=Math.min(state.outputLineCount-1,Math.max(0,Math.floor(editor.scrollTop/height)-1));
+    const count=Math.min(state.outputLineCount-first,Math.ceil(editor.clientHeight/height)+4);
+    $('outputLines').innerHTML=numbers(count,null,first);
+    $('outputLines').style.transform='translateY('+(first*height)+'px)';
+  }
+  function setStatus(text, mode='') {
+    $('statusText').textContent = text;
+    document.querySelector('.statusbar').className = 'statusbar' + (mode ? ' is-'+mode : '');
+  }
+  function setBadge(text, kind='') {
+    $('resultBadge').className = 'result-badge'+(kind?' '+kind:'');
+    $('resultBadge').replaceChildren(Object.assign(document.createElement('span'),{className:'status-dot'}),document.createTextNode(text));
+  }
+  function enableOutput(enabled) {
+    state.valid = enabled;
+    for (const id of ['copyButton','downloadButton','useOutputButton']) $(id).disabled = !enabled;
+  }
+  function setBusy(busy) {
+    state.running = busy;
+    document.body.classList.toggle('is-working',busy);
+    $('outputPane').setAttribute('aria-busy',String(busy));
+  }
+  function placeholder(title,description) {
+    $('outputPlaceholder').hidden = false;
+    $('outputPlaceholder').querySelector('strong').textContent = title;
+    $('outputPlaceholder').lastElementChild.textContent = description;
+  }
+  function clearOutput(title='Ein bisschen Ordnung wartet hier.', description='Dein formatierter Code erscheint automatisch.') {
+    state.output=''; enableOutput(false);
+    $('outputCode').textContent=''; state.outputLineCount=1;$('outputEditor').scrollTop=0;$('outputEditor').scrollLeft=0;syncOutputScroll();
+    $('outputStats').textContent='Bereit für deinen Code'; $('timingLabel').textContent='';
+    placeholder(title,description);
+  }
+  function hideDiagnostic() {
+    state.error=null; $('diagnostic').hidden=true; $('jumpErrorButton').hidden=true;
+    $('sourceInput').removeAttribute('aria-invalid');
+  }
+  function diagnostic(error,kind='syntax') {
+    state.error=error; $('diagnostic').hidden=false;
+    $('diagnostic').className='diagnostic'+(kind!=='syntax'?' notice':'');
+    const hasPosition=Number.isFinite(error.line)&&error.line>0;
+    $('diagnosticTitle').textContent = kind==='syntax' ? 'Syntaxfehler'+(hasPosition?' in Zeile '+error.line+(error.column?', Spalte '+error.column:''):'') : kind==='unsupported' ? 'Dieser Code kann nicht minifiziert werden' : 'Verarbeitung nicht verfügbar';
+    $('diagnosticMessage').textContent=error.message || 'Bitte erneut versuchen.';
+    $('jumpErrorButton').hidden=!hasPosition;
+    source.setAttribute('aria-invalid',String(kind==='syntax'));
+    updateInputStats();
+  }
+  function updateLanguage() {
+    const selected=$('languageSelect').value;
+    const detected=CodeDetect.detect(source.value,state.filename);
+    const language=selected==='auto'?detected.language:selected;
+    state.language=language;
+    const minify=$('minifyToggle').checked;
+    $('formatButtonLabel').textContent=minify?'Minifizieren':'Formatieren';
+    $('downloadButton').title=minify?'Minifizierten Code herunterladen':'Formatierten Code herunterladen';
+    $('downloadButton').setAttribute('aria-label',$('downloadButton').title);
+    $('languageStatus').textContent=language?CodeDetect.labels[language]+(selected==='auto'?' · Auto':''):'Sprache wählen';
+    $('languageStatus').title=selected==='auto'?detected.reason:'Manuell ausgewählt';
+    $('indentSelect').disabled=minify||language==='python';
+    $('indentSelect').title=minify?'Einrückung wird im Minify-Modus minimiert.':language==='python'?'Black verwendet immer 4 Leerzeichen.':'Einrückung wählen';
+    $('indentSelect').closest('label').style.opacity=minify||language==='python'?'.45':'1';
+    $('widthSelect').disabled=minify;
+    $('widthSelect').closest('label').style.opacity=minify?'.45':'1';
+    $('settingsNote').textContent=minify?'Formatierungsoptionen werden im Minify-Modus nicht angewendet.':language==='python'?'Python: Black verwendet 4 Leerzeichen und doppelte Anführungszeichen.':'Optionen gelten, soweit die jeweilige Sprache sie unterstützt.';
+    $('semiToggle').disabled=minify||language!=='javascript';
+    $('quoteToggle').disabled=minify||!['javascript','css','php'].includes(language);
+    $('engineStatus').textContent=language==='mysql'?'SQL Formatter':language==='python'?'Black':language?'Prettier':'–';
+    document.querySelectorAll('[data-language]').forEach(button=>{
+      const active=button.dataset.language===language;
+      button.classList.toggle('active',active);
+      button.setAttribute('aria-pressed',String(active));
+    });
+    return {language,detected};
+  }
+  function options() {
+    return {tabWidth:$('indentSelect').value==='4'?4:2,useTabs:$('indentSelect').value==='tab',printWidth:Number($('widthSelect').value),semi:$('semiToggle').checked,singleQuote:$('quoteToggle').checked,minify:$('minifyToggle').checked};
+  }
+  function requestFormat(immediate=false) {
+    const revision=++state.revision;
+    clearTimeout(state.timer); hideDiagnostic(); enableOutput(false); setBusy(false);
+    const code=source.value;
+    if (code.length>MAX_BYTES || (code.length>MAX_BYTES/4 && new TextEncoder().encode(code).length>MAX_BYTES)) {
+      state.sourceLineCount=1;$('inputLines').textContent='';$('inputStats').textContent='Eingabe größer als 1 MiB';$('inputPlaceholder').hidden=true;
+      clearOutput('Die Eingabe ist zu groß.','Bitte verwende maximal 1 MiB Quelltext.');
+      setBadge('Zu groß','notice');setStatus('Die maximale Dateigröße beträgt 1 MiB.','neutral');return;
+    }
+    updateInputStats();
+    const {language,detected}=updateLanguage();
+    $('outputCode').style.opacity='.45';
+    $('outputCode').title='Das Ergebnis wird nach Änderungen neu berechnet.';
+    if (!code.trim()) {
+      clearOutput(); setBadge('Bereit','pending'); setStatus('Füge Code ein oder öffne eine Datei.','neutral');return;
+    }
+    if (!language) {
+      clearOutput('Welche Sprache ist das?','Wähle oben eine Sprache, um diesen Ausschnitt zu formatieren.');
+      setBadge('Sprache wählen','notice');setStatus(detected.reason,'neutral');return;
+    }
+    if (!immediate&&!$('liveToggle').checked) {
+      setBadge('Ausstehend','pending');setStatus('Änderungen erkannt. Klicke auf „'+($('minifyToggle').checked?'Minifizieren':'Formatieren')+'“.','neutral');return;
+    }
+    setBadge($('minifyToggle').checked?'Wird minifiziert':'Wird formatiert','pending');setStatus($('minifyToggle').checked?'Minifizierung wird vorbereitet …':'Formatierung wird vorbereitet …','pending');
+    if (!state.output) placeholder('Ein Moment für mehr Ordnung.','Der Formatter bereitet deinen Code vor.');
+    if (immediate) runFormat(revision,code,language);
+    else state.timer=setTimeout(()=>runFormat(revision,code,language),320);
+  }
+  async function runFormat(revision,code,language) {
+    if(revision!==state.revision)return;
+    setBusy(true);const start=performance.now();const requestedOptions=options();const minify=requestedOptions.minify;
+    try {
+      const result=await CodeEngine.format(code,language,requestedOptions,message=>{
+        if(revision===state.revision){setStatus(message,'pending'); if(!state.output)placeholder(language==='python'?'Python wird vorbereitet.':'Ein Moment für mehr Ordnung.',message);}
+      });
+      if(revision!==state.revision)return;
+      const elapsed=performance.now()-start;
+      state.output=result.code;
+      $('outputCode').textContent=result.code;
+      $('outputCode').style.opacity='1';$('outputCode').title='';
+      $('outputPlaceholder').hidden=true;
+      state.outputLineCount=Math.max(1,lineCount(result.code));syncOutputScroll();
+      const count=lineCount(result.code);
+      $('outputStats').textContent=count.toLocaleString('de-DE')+(count===1?' Zeile':' Zeilen')+' · '+result.code.length.toLocaleString('de-DE')+' Zeichen';
+      $('timingLabel').textContent=elapsed<1000?Math.round(elapsed)+' ms':(elapsed/1000).toLocaleString('de-DE',{maximumFractionDigits:1})+' s';
+      $('engineStatus').textContent=result.engine;
+      $('engineStatus').title=result.validationNote||'Parserprüfung, keine Laufzeitanalyse.';
+      enableOutput(true);setBusy(false);
+      setBadge(minify?'Minifiziert':language==='mysql'?'Formatiert':'Parser OK');
+      const isAuto=$('languageSelect').value==='auto';
+      let status=isAuto?CodeDetect.labels[language]+' erkannt und '+(minify?'minifiziert.':'formatiert.'):CodeDetect.labels[language]+' erfolgreich '+(minify?'minifiziert.':'formatiert.');
+      if(language==='mysql')status='MySQL '+(minify?'minifiziert':'formatiert')+' · keine vollständige SQL-Validierung.';
+      if(language==='python')status=minify?'Python minifiziert · notwendige Einrückungen bleiben erhalten.':'Python formatiert · 4 Leerzeichen nach Black-Standard.';
+      if(language==='php')status+=' · Parser bis PHP 8.4';
+      setStatus(status);
+      const highlighted=await CodeHighlight.highlight(result.code,language);
+      if(revision!==state.revision)return;
+      $('outputCode').innerHTML=highlighted.html;
+      if(highlighted.reason)setStatus(status+' '+highlighted.reason,'neutral');
+    } catch(error) {
+      if(revision!==state.revision||error.kind==='cancelled')return;
+      setBusy(false);clearOutput('Hier fehlt noch ein kleines Detail.','Korrigiere die Eingabe, dann erscheint hier dein Ergebnis.');
+      const kind=error.kind==='syntax'?'syntax':error.kind==='unsupported'?'unsupported':'dependency';
+      diagnostic(error,kind);
+      setBadge(kind==='syntax'?'Fehler gefunden':kind==='unsupported'?'Nicht unterstützt':'Nicht geladen',kind==='syntax'?'error':'notice');
+      setStatus(kind==='syntax'?'Die Eingabe enthält einen Parserfehler. Dein Original bleibt erhalten.':kind==='unsupported'?'Minifizierung nicht möglich. Details stehen in der Fehleranzeige.':'Die Verarbeitung konnte nicht gestartet werden. Du kannst es erneut versuchen.',kind==='syntax'?'error':'neutral');
+      if(kind==='dependency')placeholder('Der Formatter ist noch nicht bereit.','Prüfe die Internetverbindung und starte den Vorgang erneut.');
+      if(kind==='unsupported')placeholder('Dieser Ausschnitt kann nicht minifiziert werden.','Die Fehleranzeige erläutert den Grund. Deine Eingabe bleibt erhalten.');
+    }
+  }
+  function toast(message,duration=3500) {
+    clearTimeout(state.toastTimer);$('toastText').textContent=message;$('toast').hidden=false;
+    state.toastTimer=setTimeout(()=>{$('toast').hidden=true;},duration);
+  }
+  function replaceSource(text,{filename='',example=null,auto=false}={}) {
+    state.importRevision++;state.filename=filename;state.example=example;
+    source.value=text.replace(/^\uFEFF/,'');source.scrollTop=0;source.scrollLeft=0;
+    if(auto)$('languageSelect').value='auto';
+    requestFormat(true);
+  }
+  function loadExample(language) {
+    replaceSource(CodeDetect.samples[language],{example:language,auto:true});
+    toast(CodeDetect.labels[language]+'-Beispiel geladen.');
+  }
+  async function importFile(file) {
+    if(!file)return;
+    const importRevision=++state.importRevision;
+    if(file.size>MAX_BYTES){toast('Die Datei ist zu groß. Maximal 1 MiB sind möglich.',5000);return;}
+    try {
+      const bytes=await file.arrayBuffer();
+      if(importRevision!==state.importRevision)return;
+      const text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);
+      if(/[\u0000-\u0008\u000e-\u001f]/.test(text)){toast('Bitte öffne eine UTF-8-Textdatei, keine Binärdatei.',5000);return;}
+      replaceSource(text,{filename:file.name,auto:true});
+      toast('„'+file.name+'“ geöffnet.');
+    }catch(_){toast('Die Datei konnte nicht als UTF-8-Text gelesen werden.',5000);}
+  }
+  async function pasteFromClipboard() {
+    const importRevision=++state.importRevision;
+    try {
+      if(!navigator.clipboard?.readText)throw new Error('clipboard unavailable');
+      const text=await navigator.clipboard.readText();
+      if(importRevision!==state.importRevision)return;
+      if(!text){toast('Die Zwischenablage enthält keinen Text.');return;}
+      if(new Blob([text]).size>MAX_BYTES){toast('Der Text ist zu groß. Maximal 1 MiB sind möglich.',5000);return;}
+      replaceSource(text,{auto:true});toast('Text aus der Zwischenablage eingefügt.');
+    }catch(_){source.focus();toast('Zwischenablage nicht freigegeben. Füge deinen Code mit '+platform+' + V ein.',6500);}
+  }
+  async function copyOutput() {
+    if(!state.valid)return;
+    const text=state.output;
+    try {
+      if(!navigator.clipboard?.writeText)throw new Error('clipboard unavailable');
+      await navigator.clipboard.writeText(text);
+    }catch(_){
+      const helper=document.createElement('textarea');helper.value=text;helper.style.cssText='position:fixed;left:-9999px;top:0';document.body.append(helper);helper.select();
+      let copied=false;try{copied=document.execCommand('copy');}catch(_){}helper.remove();
+      if(!copied){toast('Kopieren nicht möglich. Markiere den Code und nutze '+platform+' + C.',5000);return;}
+    }
+    toast($('minifyToggle').checked?'Minifizierter Code kopiert.':'Formatierter Code kopiert.');
+    const label=$('copyButton').lastElementChild;label.textContent='Kopiert';setTimeout(()=>{label.textContent='Kopieren';},1800);
+  }
+  function downloadOutput() {
+    if(!state.valid)return;
+    const name=(state.filename?state.filename.replace(/\.[^.]+$/,''):'code').replace(/[^\p{L}\p{N}_.-]/gu,'_').slice(0,120);
+    const filename=name+($('minifyToggle').checked?'.min.':'.pretty.')+(CodeDetect.extensions[state.language]||'txt');
+    const blob=new Blob([state.output],{type:'text/plain;charset=utf-8'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+    toast('„'+filename+'“ wird heruntergeladen.');
+  }
+  function jumpToError() {
+    if(!state.error?.line)return;
+    const lines=source.value.split('\n');const line=Math.min(lines.length,state.error.line);
+    let start=lines.slice(0,line-1).reduce((sum,text)=>sum+text.length+1,0);
+    start+=Math.min(lines[line-1].length,Math.max(0,(state.error.column||1)-1));
+    source.focus();source.setSelectionRange(start,Math.min(start+1,source.value.length));
+    const lineHeight=parseFloat(getComputedStyle(source).lineHeight);
+    source.scrollTop=Math.max(0,(line-4)*lineHeight);syncInputScroll();updateCursor();
+  }
+  source.addEventListener('input',()=>{state.importRevision++;state.example=null;requestFormat();});
+  source.addEventListener('scroll',syncInputScroll);
+  $('outputEditor').addEventListener('scroll',syncOutputScroll);
+  window.addEventListener('resize',()=>{syncInputScroll();syncOutputScroll();});
+  for(const event of ['click','keyup','select'])source.addEventListener(event,updateCursor);
+  source.addEventListener('paste',()=>{if(source.selectionStart===0&&source.selectionEnd===source.value.length)state.filename='';});
+  let releaseTab=false;
+  source.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){releaseTab=true;return;}
+    if(event.key==='Tab'&&releaseTab){releaseTab=false;return;}
+    releaseTab=false;
+    if(event.key==='Tab'){
+      event.preventDefault();const size=state.language==='python'?4:options().tabWidth;
+      const indent=state.language!=='python'&&options().useTabs?'\t':' '.repeat(size);
+      const start=source.selectionStart,end=source.selectionEnd;
+      if(start!==end){
+        const lineStart=source.value.lastIndexOf('\n',start-1)+1;
+        const lastPosition=end>start&&source.value[end-1]==='\n'?end-1:end;
+        const nextBreak=source.value.indexOf('\n',lastPosition);
+        const lineEnd=nextBreak<0?source.value.length:nextBreak;
+        const original=source.value.slice(lineStart,lineEnd);
+        const removeIndent=new RegExp('^(\\t| {1,'+size+'})');
+        const replacement=original.split('\n').map(line=>event.shiftKey?line.replace(removeIndent,''):indent+line).join('\n');
+        source.setSelectionRange(lineStart,lineEnd);
+        let inserted=false;try{inserted=document.execCommand('insertText',false,replacement);}catch(_){}
+        if(!inserted){source.setRangeText(replacement,lineStart,lineEnd,'end');source.dispatchEvent(new Event('input',{bubbles:true}));}
+        source.setSelectionRange(lineStart,lineStart+replacement.length);updateCursor();
+      }else if(event.shiftKey){
+        const lineStart=source.value.lastIndexOf('\n',start-1)+1;
+        const line=source.value.slice(lineStart);const match=line.match(/^(\t| {1,4})/);
+        if(match){const remove=Math.min(match[0].length,size);source.setRangeText('',lineStart,lineStart+remove,'preserve');source.dispatchEvent(new Event('input',{bubbles:true}));}
+      }else{
+        let inserted=false;try{inserted=document.execCommand('insertText',false,indent);}catch(_){}
+        if(!inserted){source.setRangeText(indent,start,end,'end');source.dispatchEvent(new Event('input',{bubbles:true}));}
+      }
+    }
+  });
+  $('formatButton').addEventListener('click',()=>requestFormat(true));
+  for(const id of ['languageSelect','indentSelect','widthSelect','semiToggle','quoteToggle','minifyToggle'])$(id).addEventListener('change',()=>{
+    const tabSize=$('indentSelect').value==='4'?4:2;source.style.tabSize=tabSize;document.querySelector('.output-pre').style.tabSize=tabSize;
+    requestFormat(true);
+  });
+  $('liveToggle').addEventListener('change',()=>requestFormat($('liveToggle').checked));
+  $('clearButton').addEventListener('click',()=>{replaceSource('',{auto:true});source.focus();toast('Eingabe geleert.');});
+  $('fileButton').addEventListener('click',()=>{$('fileInput').value='';$('fileInput').click();});
+  $('fileInput').addEventListener('change',event=>importFile(event.target.files[0]));
+  $('pasteButton').addEventListener('click',pasteFromClipboard);
+  $('copyButton').addEventListener('click',copyOutput);
+  $('downloadButton').addEventListener('click',downloadOutput);
+  $('useOutputButton').addEventListener('click',()=>{if(!state.valid)return;replaceSource(state.output,{filename:state.filename});source.focus();toast('Formatierten Code als Eingabe übernommen.');});
+  $('jumpErrorButton').addEventListener('click',jumpToError);
+  $('settingsButton').addEventListener('click',()=>{const expanded=$('settingsPanel').hidden;$('settingsPanel').hidden=!expanded;$('settingsButton').setAttribute('aria-expanded',String(expanded));});
+  $('expandButton').addEventListener('click',()=>{const expanded=$('editors').classList.toggle('is-expanded');$('expandButton').setAttribute('aria-pressed',String(expanded));$('expandButton').setAttribute('aria-label',expanded?'Beide Bereiche anzeigen':'Ergebnis vergrößern');$('expandButton').title=expanded?'Beide Bereiche anzeigen':'Ergebnis vergrößern';});
+  document.querySelectorAll('[data-language]').forEach(button=>button.addEventListener('click',()=>loadExample(button.dataset.language)));
+  $('emptyExampleButton').addEventListener('click',()=>loadExample('javascript'));
+  $('helpButton').addEventListener('click',()=>$('helpDialog').showModal());
+  for(const id of ['closeHelpButton','gotItButton'])$(id).addEventListener('click',()=>$('helpDialog').close());
+  $('helpDialog').addEventListener('click',event=>{if(event.target===$('helpDialog')){const rect=$('helpDialog').getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)$('helpDialog').close();}});
+  document.addEventListener('keydown',event=>{
+    if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();requestFormat(true);}
+    if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='o'){event.preventDefault();$('fileInput').value='';$('fileInput').click();}
+  });
+  let dragDepth=0,internalTextDrag=false;
+  document.addEventListener('dragstart',event=>{internalTextDrag=Boolean(event.target.closest?.('#sourceEditor, #outputEditor'));});
+  function acceptableDrag(event){return Array.from(event.dataTransfer?.types||[]).some(type=>type==='Files'||type==='text/plain');}
+  document.addEventListener('dragenter',event=>{if(internalTextDrag||!acceptableDrag(event))return;event.preventDefault();dragDepth++;$('dropOverlay').hidden=false;});
+  document.addEventListener('dragover',event=>{if(internalTextDrag||!acceptableDrag(event))return;event.preventDefault();event.dataTransfer.dropEffect='copy';});
+  document.addEventListener('dragleave',event=>{if(internalTextDrag||!acceptableDrag(event))return;dragDepth=Math.max(0,dragDepth-1);if(!dragDepth)$('dropOverlay').hidden=true;});
+  document.addEventListener('drop',event=>{
+    if(internalTextDrag){internalTextDrag=false;dragDepth=0;$('dropOverlay').hidden=true;if(event.target!==source)event.preventDefault();return;}
+    if(!acceptableDrag(event))return;event.preventDefault();dragDepth=0;$('dropOverlay').hidden=true;
+    const files=event.dataTransfer.files;
+    if(files.length){importFile(files[0]);if(files.length>1)toast('Die erste Datei wird geöffnet. Bitte jeweils eine Datei verwenden.',4500);return;}
+    const text=event.dataTransfer.getData('text/plain');if(text){replaceSource(text,{auto:true});toast('Text übernommen.');}
+  });
+  window.addEventListener('dragend',()=>{internalTextDrag=false;dragDepth=0;$('dropOverlay').hidden=true;});
+  window.addEventListener('pagehide',()=>CodeEngine.dispose?.());
+  replaceSource(CodeDetect.samples.javascript,{example:'javascript',auto:true});
+})();
+
+  </script>
+</body>
+</html>
