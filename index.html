@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111315">
-  <meta name="description" content="Code formatieren und minifizieren: HTML, CSS, JavaScript, MySQL, PHP, Python und JSON mit Syntax-Highlighting und Fehleranzeige.">
+  <meta name="description" content="Code formatieren und minifizieren: HTML, CSS, JavaScript, MySQL, PHP, Python, JSON und XML mit Syntax-Highlighting und Fehleranzeige.">
   <title>prettycode. — Code-Formatter</title>
   <style>
 :root{color-scheme:dark;--bg:#111315;--panel:#181b1e;--editor:#15181b;--border:#2c3034;--border-soft:#25292d;--text:#e7e9eb;--muted:#8b939c;--subtle:#59616b;--accent:#b6edbd;--accent-dim:#20382a;--error:#ff9b9b;--mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;--sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -15,7 +15,7 @@ main{max-width:1560px;margin:0 auto;padding:43px 42px 0}.intro{display:flex;alig
 .editors{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--editor)}.editor-pane{min-width:0;position:relative;display:flex;flex-direction:column}.source-pane{border-right:1px solid var(--border)}.pane-header{height:49px;padding:0 17px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-soft);background:#191d20;gap:8px}.pane-title{display:flex;align-items:center;gap:9px;min-width:0}.pane-title svg{width:15px;height:15px;color:var(--muted)}.pane-title .accent-icon svg{color:var(--accent)}.pane-title h2{font-size:12px;font-weight:550;margin:0;white-space:nowrap}.file-badge{padding:2px 7px;border-radius:4px;border:1px solid #30363c;font-size:10px;color:#8f9aa4;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:5px}.output-actions{display:flex;align-items:center;gap:6px}.copy-button{display:flex;align-items:center;gap:6px;font-size:11px;color:#9ea9b3;background:transparent;padding:6px 8px;border:1px solid transparent;border-radius:5px;white-space:nowrap}.copy-button svg{width:14px;height:14px}.copy-button:hover:not(:disabled){border-color:#41494f;color:var(--text);background:#252b2f}.result-badge{display:flex;align-items:center;gap:6px;color:#96cba0;font-size:9px;border:1px solid #304a38;border-radius:4px;padding:2px 6px;margin-left:4px;white-space:nowrap}.result-badge .status-dot{width:4px;height:4px}.result-badge.error{color:var(--error);border-color:#5b3539}.result-badge.error .status-dot{background:var(--error)}.result-badge.pending{color:#b2b7bc;border-color:#41474c}.result-badge.pending .status-dot{background:#a5acb3}.result-badge.notice{color:#e1c086;border-color:#594b36}.result-badge.notice .status-dot{background:#e1c086}
 .source-editor,.output-editor{height:clamp(360px,49vh,640px);min-height:360px;position:relative;background:var(--editor)}.source-editor{display:flex;overflow:hidden}.source-editor:focus-within{box-shadow:inset 0 0 0 1px #4b6052}.input-area{position:relative;flex:1;min-width:0}.line-gutter{width:48px;flex-shrink:0;text-align:right;color:#505b65;user-select:none;overflow:hidden;background:#15181b}.line-gutter pre{font-family:var(--mono);font-size:12px;line-height:23px;margin:0;padding:21px 12px 20px 0;white-space:pre}.line-gutter pre .error-line{color:#ff9292;font-weight:700;background:#5e282f;border-radius:2px}#sourceInput{width:100%;height:100%;background:transparent;color:#b5c0cb;resize:none;border:0;outline:0;font-family:var(--mono);font-size:12px;line-height:23px;tab-size:2;padding:21px 17px 20px 4px;white-space:pre;overflow:auto;border-radius:0;caret-color:var(--accent)}#sourceInput::selection{background:#3d5e48;color:#f3fff6}.output-editor{display:flex;overflow:auto;outline-offset:-2px;background:#161a1d}.output-gutter{position:sticky;left:0;z-index:1;background:#161a1d;min-height:100%;height:fit-content;overflow:visible}.output-pre{flex:1;min-width:0;margin:0;font-family:var(--mono);font-size:12px;line-height:23px;tab-size:2;padding:21px 20px 20px 4px;color:#d5dde5;overflow:visible;height:fit-content;white-space:pre}.output-pre code{font:inherit;display:block;min-width:max-content;min-height:23px}.output-placeholder,.input-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;text-align:center;padding:24px;color:var(--subtle);pointer-events:none}.output-placeholder>span[data-icon]{margin-bottom:7px;color:#4b6353}.output-placeholder svg{width:28px;height:28px}.output-placeholder strong,.input-placeholder strong{font-size:13px;font-weight:500;color:#828e99}.output-placeholder>span:last-child,.input-placeholder>span{font-size:11px}.input-placeholder>.placeholder-icon{height:47px;width:47px;display:grid;place-items:center;border:1px solid #333b42;border-radius:10px;margin-bottom:8px;color:#96b39d}.input-placeholder .text-button{pointer-events:auto;margin-top:8px;color:var(--accent);position:relative;z-index:1}.input-placeholder{padding:15px}.pane-footer{height:35px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 15px;color:#68747f;font-size:10px;border-top:1px solid var(--border-soft);background:#171b1e;white-space:nowrap}.drop-hint{display:flex;gap:6px;align-items:center;margin-left:auto;margin-right:12px}.drop-hint svg{width:12px;height:12px}.text-button{display:inline-flex;align-items:center;justify-content:center;gap:5px;background:transparent;color:#8c9b91;font-size:inherit;padding:0}.text-button:hover:not(:disabled){color:var(--accent)}.use-output{font-size:10px;color:#8b9a91;margin-left:auto}.use-output svg{width:12px;height:12px}#timingLabel{padding-left:2px;color:#82918a}.drop-overlay{position:absolute;inset:8px;border:1px dashed var(--accent);border-radius:7px;z-index:5;background:#16241ff5;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;pointer-events:none;color:var(--accent)}.drop-overlay svg{width:35px;height:35px}.drop-overlay strong{font-size:20px;font-weight:500}.drop-overlay>span:last-child{font-size:12px;color:#a7b4ad}
 .statusbar{min-height:38px;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;gap:12px;background:#1c2223;border-top:1px solid #2e3831;font-size:10px;color:#95a79b}.status-main{display:flex;align-items:center;gap:8px}.status-main .status-dot{width:5px;height:5px}.status-meta{display:flex;align-items:center;gap:10px;color:#87958e;white-space:nowrap}.status-separator{color:#49574e}.statusbar.is-error{background:#2b2024;border-color:#4f3037;color:#f0a6ae}.statusbar.is-error .status-dot{background:var(--error)}.statusbar.is-pending{background:#202427;border-color:#31383d;color:#a1adb7}.statusbar.is-pending .status-dot{background:#adb8c0;animation:pulse 1.2s infinite}.statusbar.is-neutral{background:#1c2023;border-color:var(--border);color:#909da7}.statusbar.is-neutral .status-dot{background:#7f8d98}.diagnostic{display:flex;gap:12px;padding:15px 19px;align-items:flex-start;color:#edabb2;background:#2c2025;border-top:1px solid #60353e}.diagnostic>span{margin-top:2px}.diagnostic strong{font-size:12px;font-weight:550}.diagnostic pre{font:11px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;margin:5px 0 0;color:#c88e96;max-height:130px;overflow:auto}.diagnostic .text-button{font-size:11px;color:#e7b4b9;margin-left:auto;flex-shrink:0;padding-top:2px}.diagnostic>div{min-width:0}.diagnostic.notice{background:#2b271f;border-color:#594c33;color:#e2c894}.diagnostic.notice pre{color:#b8a078}
-.examples{display:flex;align-items:center;justify-content:center;gap:20px;padding:22px 10px 21px;border-bottom:1px solid var(--border-soft)}.examples-label{font-size:11px;color:#7e8a94}.example-buttons{display:flex;flex-wrap:wrap;gap:5px}.example-buttons button{display:flex;align-items:center;gap:6px;background:transparent;color:#939fa9;font-size:11px;padding:6px 9px;border:1px solid transparent;border-radius:5px}.example-buttons button:hover{background:#252b2e;color:#d0d8de}.example-buttons button.active{background:#242b27;border-color:#3a4a3e;color:#c7dbcc}.language-dot{width:5px;height:5px;border-radius:50%;opacity:.9}.language-dot.html{background:#e99b7f}.language-dot.css{background:#94b5f6}.language-dot.javascript{background:#e9cc7c}.language-dot.mysql{background:#8cccd1}.language-dot.php{background:#aba1e3}.language-dot.python{background:#9dc2ed}.language-dot.json{background:#c2c9d0}.bottom-notes{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 1px;color:#73807b;font-size:10px}.bottom-notes>span{display:flex;align-items:center;gap:7px}.bottom-notes svg{height:12px;width:12px}.bottom-notes kbd{background:#242b27;border:1px solid #36413a;border-radius:4px;padding:1px 5px;color:#9aaea0;font-size:9px}.note-divider{padding:0 8px;color:#46534b}.bottom-notes .text-button{color:#8c9e93}.site-footer{max-width:1560px;margin:0 auto;padding:22px 43px 26px;display:flex;justify-content:space-between;align-items:center;color:#4f5b55;font-size:10px;gap:12px}.site-footer>span:last-child{font-size:8px;letter-spacing:1.1px;display:flex;align-items:center;gap:10px}.footer-star{color:#82a58b;font-size:18px}
+.examples{display:flex;align-items:center;justify-content:center;gap:20px;padding:22px 10px 21px;border-bottom:1px solid var(--border-soft)}.examples-label{font-size:11px;color:#7e8a94}.example-buttons{display:flex;flex-wrap:wrap;gap:5px}.example-buttons button{display:flex;align-items:center;gap:6px;background:transparent;color:#939fa9;font-size:11px;padding:6px 9px;border:1px solid transparent;border-radius:5px}.example-buttons button:hover{background:#252b2e;color:#d0d8de}.example-buttons button.active{background:#242b27;border-color:#3a4a3e;color:#c7dbcc}.language-dot{width:5px;height:5px;border-radius:50%;opacity:.9}.language-dot.html{background:#e99b7f}.language-dot.css{background:#94b5f6}.language-dot.javascript{background:#e9cc7c}.language-dot.mysql{background:#8cccd1}.language-dot.php{background:#aba1e3}.language-dot.python{background:#9dc2ed}.language-dot.json{background:#c2c9d0}.language-dot.xml{background:#d4a5e8}.bottom-notes{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 1px;color:#73807b;font-size:10px}.bottom-notes>span{display:flex;align-items:center;gap:7px}.bottom-notes svg{height:12px;width:12px}.bottom-notes kbd{background:#242b27;border:1px solid #36413a;border-radius:4px;padding:1px 5px;color:#9aaea0;font-size:9px}.note-divider{padding:0 8px;color:#46534b}.bottom-notes .text-button{color:#8c9e93}.site-footer{max-width:1560px;margin:0 auto;padding:22px 43px 26px;display:flex;justify-content:space-between;align-items:center;color:#4f5b55;font-size:10px;gap:12px}.site-footer>span:last-child{font-size:8px;letter-spacing:1.1px;display:flex;align-items:center;gap:10px}.footer-star{color:#82a58b;font-size:18px}
 .hljs-comment,.hljs-quote{color:#657b75;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-literal,.hljs-meta .hljs-keyword{color:#c0a8e5}.hljs-string,.hljs-regexp,.hljs-attribute,.hljs-meta .hljs-string{color:#b7d7a1}.hljs-number,.hljs-symbol,.hljs-bullet{color:#dfb77f}.hljs-title,.hljs-title.function_,.hljs-section{color:#8bc6de}.hljs-title.class_,.hljs-type,.hljs-built_in{color:#e2c996}.hljs-attr,.hljs-variable,.hljs-template-variable{color:#a7c9db}.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#dfad9c}.hljs-punctuation,.hljs-operator{color:#9ba7b2}.hljs-params,.hljs-subst{color:#c5cfd7}.hljs-property{color:#b4d1e0}.hljs-doctag,.hljs-meta{color:#bc9fcf}.hljs-addition{color:#b7d7a1}.hljs-deletion{color:#e6a1a1}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 30px);z-index:20;display:flex;align-items:center;gap:10px;padding:12px 18px;background:#283a2e;border:1px solid #4d6c55;border-radius:9px;box-shadow:0 8px 32px #0006;color:#c3e8ca;font-size:12px}.toast svg{width:16px;height:16px}dialog{color:var(--text);width:min(590px,calc(100vw - 30px));max-height:calc(100vh - 50px);padding:25px 30px 29px;background:#1b2023;border:1px solid #3b4449;border-radius:14px;box-shadow:0 25px 100px #0009;overflow:auto}dialog::backdrop{background:#050809b0;backdrop-filter:blur(5px)}.dialog-header{display:flex;align-items:center;justify-content:space-between;gap:10px}dialog h2{font-size:25px;font-weight:550;letter-spacing:-.5px;margin:14px 0 12px}dialog p{font-size:13px;line-height:1.7;color:#a5b0b8}.help-list{margin:22px 0}.help-list>div{padding:12px 0;border-top:1px solid #30383e}.help-list dt{font-size:12px;font-weight:600;color:#c8dcd0;margin-bottom:4px}.help-list dd{margin:0;font-size:12px;line-height:1.7;color:#909fa8}.shortcut-list{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:#9eaeb5}.shortcut-list kbd{border:1px solid #46514d;padding:1px 5px;border-radius:3px}.library-note{font-size:10px!important;color:#6e8078!important;margin:20px 0}.noscript-message{position:fixed;inset:0;background:#171c20ed;color:#d6e5dd;display:grid;place-content:center;padding:30px;font-size:20px}.editors.is-expanded{grid-template-columns:minmax(0,1fr)}.editors.is-expanded .source-pane{display:none}.editors.is-expanded .output-editor{height:65vh}.is-working #formatButton [data-icon="wand"]{animation:pulse 1s infinite}::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:#343d43;border-radius:6px;border:2px solid var(--editor)}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-corner{background:transparent}@keyframes pulse{50%{opacity:.35}}
 @media(min-width:1600px){.site-header{padding-left:calc((100vw - 1476px)/2);padding-right:calc((100vw - 1476px)/2);max-width:none}main{padding-top:50px}.source-editor,.output-editor{height:51vh}}
@@ -53,7 +53,7 @@ main{padding-top:24px}
       <div class="import-actions">
         <button class="button button-secondary" id="pasteButton"><span data-icon="clipboard"></span> Einfügen</button>
         <button class="button button-light" id="fileButton"><span data-icon="folder"></span> Datei öffnen <kbd>⌘ O</kbd></button>
-        <input type="file" id="fileInput" accept=".html,.htm,.xhtml,.css,.js,.mjs,.cjs,.jsx,.sql,.mysql,.php,.phtml,.py,.pyw,.json,.txt,text/*,application/json,application/javascript" hidden>
+        <input type="file" id="fileInput" accept=".html,.htm,.xhtml,.css,.js,.mjs,.cjs,.jsx,.sql,.mysql,.php,.phtml,.py,.pyw,.json,.xml,.xsl,.xslt,.svg,.rss,.atom,.txt,text/*,application/json,application/javascript,application/xml,text/xml" hidden>
       </div>
     </section>
 
@@ -66,7 +66,7 @@ main{padding-top:24px}
             <select id="languageSelect">
               <option value="auto">Automatisch erkennen</option>
               <option value="html">HTML</option><option value="css">CSS</option><option value="javascript">JavaScript</option>
-              <option value="mysql">MySQL</option><option value="php">PHP</option><option value="python">Python</option><option value="json">JSON</option>
+              <option value="mysql">MySQL</option><option value="php">PHP</option><option value="python">Python</option><option value="json">JSON</option><option value="xml">XML</option>
             </select>
           </div>
           <span class="toolbar-divider"></span>
@@ -134,7 +134,7 @@ main{padding-top:24px}
     <section class="examples" aria-label="Sprachbeispiele">
       <span class="examples-label">Einfach ausprobieren</span>
       <div class="example-buttons">
-        <button data-language="html"><span class="language-dot html"></span>HTML</button><button data-language="css"><span class="language-dot css"></span>CSS</button><button data-language="javascript" class="active"><span class="language-dot javascript"></span>JavaScript</button><button data-language="mysql"><span class="language-dot mysql"></span>MySQL</button><button data-language="php"><span class="language-dot php"></span>PHP</button><button data-language="python"><span class="language-dot python"></span>Python</button><button data-language="json"><span class="language-dot json"></span>JSON</button>
+        <button data-language="html"><span class="language-dot html"></span>HTML</button><button data-language="css"><span class="language-dot css"></span>CSS</button><button data-language="javascript" class="active"><span class="language-dot javascript"></span>JavaScript</button><button data-language="mysql"><span class="language-dot mysql"></span>MySQL</button><button data-language="php"><span class="language-dot php"></span>PHP</button><button data-language="python"><span class="language-dot python"></span>Python</button><button data-language="json"><span class="language-dot json"></span>JSON</button><button data-language="xml"><span class="language-dot xml"></span>XML</button>
       </div>
     </section>
 
@@ -145,9 +145,9 @@ main{padding-top:24px}
 
   <dialog id="helpDialog">
     <div class="dialog-header"><span class="eyebrow">PRETTYCODE / HILFE</span><button class="icon-button" id="closeHelpButton" aria-label="Hilfe schließen"><span data-icon="close"></span></button></div>
-    <h2>Ein Werkzeug. Sieben Sprachen.</h2>
+    <h2>Ein Werkzeug. Acht Sprachen.</h2>
     <p>Füge Code ein, öffne eine Datei oder ziehe sie in die Eingabe. Das Ergebnis aktualisiert sich nach einer kurzen Schreibpause. Deine Eingabe bleibt dabei unverändert.</p>
-    <dl class="help-list"><div><dt>Minify</dt><dd>Der Schalter ist beim Öffnen ausgeschaltet. Eingeschaltet wird jeder Formatierungsvorgang zur Minifizierung, auch bei Dateiimport und Live-Eingabe. Notwendige Leerzeichen und Einrückungen bleiben erhalten; Bezeichner werden nicht umbenannt.</dd></div><div><dt>Automatische Erkennung</dt><dd>Dateiendungen und typische Sprachmerkmale helfen bei der Auswahl. Bei kurzen oder mehrdeutigen Ausschnitten kannst du die Sprache selbst festlegen.</dd></div><div><dt>Fehleranzeige</dt><dd>Parserfehler werden mit Zeile und Spalte angezeigt, sofern der Parser eine Position liefert. Die Formatierung ist keine vollständige Codeanalyse. MySQL erhält eine Formatierungsprüfung, keine Datenbankvalidierung. DELIMITER und Stored Procedures werden nicht unterstützt.</dd></div><div><dt>Python</dt><dd>Der Python-Formatter Black lädt beim ersten Einsatz eine zusätzliche Browser-Laufzeit. Das kann einen Moment dauern. Im normalen Formatierungsmodus verwendet Black vier Leerzeichen; die Einrückungseinstellung gilt hier nicht. Minify entfernt überflüssigen Leerraum und behält notwendige Python-Einrückungen bei. Dein Python-Code wird nicht ausgeführt.</dd></div><div><dt>Browser & Datenschutz</dt><dd>Dein Code wird lokal verarbeitet und nicht an einen Formatierungsserver gesendet. Externe Bibliotheken werden bei Bedarf über CDN geladen; dafür ist Internet nötig. Es werden keine Codeeingaben dauerhaft gespeichert. Dateien bis 1 MiB werden unterstützt.</dd></div></dl>
+    <dl class="help-list"><div><dt>Minify</dt><dd>Der Schalter ist beim Öffnen ausgeschaltet. Eingeschaltet wird jeder Formatierungsvorgang zur Minifizierung, auch bei Dateiimport und Live-Eingabe. Notwendige Leerzeichen und Einrückungen bleiben erhalten; Bezeichner werden nicht umbenannt.</dd></div><div><dt>Automatische Erkennung</dt><dd>Dateiendungen und typische Sprachmerkmale helfen bei der Auswahl. Bei kurzen oder mehrdeutigen Ausschnitten kannst du die Sprache selbst festlegen.</dd></div><div><dt>Fehleranzeige</dt><dd>Parserfehler werden mit Zeile und Spalte angezeigt, sofern der Parser eine Position liefert. Die Formatierung ist keine vollständige Codeanalyse. MySQL erhält eine Formatierungsprüfung, keine Datenbankvalidierung. DELIMITER und Stored Procedures werden nicht unterstützt.</dd></div><div><dt>Python</dt><dd>Der Python-Formatter Black lädt beim ersten Einsatz eine zusätzliche Browser-Laufzeit. Das kann einen Moment dauern. Im normalen Formatierungsmodus verwendet Black vier Leerzeichen; die Einrückungseinstellung gilt hier nicht. Minify entfernt überflüssigen Leerraum und behält notwendige Python-Einrückungen bei. Dein Python-Code wird nicht ausgeführt.</dd></div><div><dt>XML</dt><dd>Wohlgeformtheitsprüfung mit Tag-Verschachtelung, Attribut-Syntax und Entitätsreferenzen; keine Schema-Validierung (DTD/XSD). Die Formatierung richtet Elementinhalte ein und lässt Textinhalte sowie gemischte Inhalte unverändert. Minify entfernt nur überflüssige Einrückung zwischen Elementen – Kommentare, CDATA und Text bleiben erhalten.</dd></div><div><dt>Browser &amp; Datenschutz</dt><dd>Dein Code wird lokal verarbeitet und nicht an einen Formatierungsserver gesendet. Externe Bibliotheken werden bei Bedarf über CDN geladen; dafür ist Internet nötig. Es werden keine Codeeingaben dauerhaft gespeichert. Dateien bis 1 MiB werden unterstützt.</dd></div></dl>
     <div class="shortcut-list"><span><kbd class="cmd-key">Ctrl</kbd> + <kbd>Enter</kbd> Formatieren</span><span><kbd class="cmd-key">Ctrl</kbd> + <kbd>O</kbd> Datei öffnen</span><span><kbd>Tab</kbd> Einrücken</span><span><kbd>Esc</kbd>, dann <kbd>Tab</kbd> Eingabe verlassen</span></div>
     <p class="library-note">Mit Prettier, SQL Formatter, Black / Pyodide, sprachspezifischen Minifiern und highlight.js. Syntaxfarben dienen der Lesbarkeit und ersetzen keine Prüfung.</p>
     <button class="button button-primary" id="gotItButton">Alles klar <span data-icon="check"></span></button>
@@ -159,17 +159,19 @@ main{padding-top:24px}
 
   const labels = Object.freeze({
     html: 'HTML', css: 'CSS', javascript: 'JavaScript', mysql: 'MySQL',
-    php: 'PHP', python: 'Python', json: 'JSON'
+    php: 'PHP', python: 'Python', json: 'JSON', xml: 'XML'
   });
   const extensions = Object.freeze({
     html: 'html', css: 'css', javascript: 'js', mysql: 'sql',
-    php: 'php', python: 'py', json: 'json'
+    php: 'php', python: 'py', json: 'json', xml: 'xml'
   });
   const extensionLanguages = Object.freeze({
     html: 'html', htm: 'html', xhtml: 'html', css: 'css',
     js: 'javascript', mjs: 'javascript', cjs: 'javascript', jsx: 'javascript',
     sql: 'mysql', mysql: 'mysql', php: 'php', phtml: 'php',
-    py: 'python', pyw: 'python', json: 'json'
+    py: 'python', pyw: 'python', json: 'json',
+    xml: 'xml', xsl: 'xml', xslt: 'xml', svg: 'xml',
+    rss: 'xml', atom: 'xml', plist: 'xml'
   });
 
   function result(language, confidence, source, reason) {
@@ -187,6 +189,11 @@ main{padding-top:24px}
     const text = String(code == null ? '' : code).replace(/^\uFEFF/, '').trim();
     if (!text) return result(null, 'low', 'ambiguous', 'Code eingeben oder eine Datei öffnen.');
 
+    // Eine XML-Deklaration am Dokumentanfang ist eindeutig.
+    if (/^<\?xml(?:\s|\?)/i.test(text)) {
+      return result('xml', 'high', 'content', 'XML-Deklaration erkannt');
+    }
+
     // This is deliberately a heuristic, never eval or execution of user input.
     // A valid JSON document is a less ambiguous match than JavaScript syntax.
     try {
@@ -201,7 +208,7 @@ main{padding-top:24px}
     // Limit heuristic scanning for large files; the formatter receives all input.
     const head = text.slice(0, 60000);
     const start = head.replace(/^(?:(?:\s*\/\*[\s\S]*?\*\/)|(?:\s*\/\/[^\n]*(?:\n|$))|(?:\s*--[^\n]*(?:\n|$))|(?:\s*#(?:[ \t]|!)[^\n]*(?:\n|$))|(?:\s*<!--[\s\S]*?-->))*/, '').trimStart();
-    const scores = { html: 0, css: 0, javascript: 0, mysql: 0, php: 0, python: 0, json: 0 };
+    const scores = { html: 0, css: 0, javascript: 0, mysql: 0, php: 0, python: 0, json: 0, xml: 0 };
     const reasons = {};
     const clue = (language, score, reason) => {
       scores[language] += score;
@@ -271,8 +278,15 @@ main{padding-top:24px}
     }
     if (/^\[\s*(?:\{|\[|"|-?\d|true\b|false\b|null\b)/.test(start)) clue('json', 5, 'Möglicherweise ein JSON-Array');
 
+    // XML-Signale: Namensräume und typische Wurzelelemente.
+    if (/\bxmlns(?::\w+)?\s*=/.test(head)) clue('xml', 10, 'XML-Namensraum erkannt');
+    if (/^<(?:svg|rss|feed|plist|smil|xsl:stylesheet|xsl:transform|rdf:RDF|wsdl:definitions)\b/i.test(start)) {
+      clue('xml', 12, 'Bekanntes XML-Format erkannt');
+    }
+
     // Strong initial markup is HTML even if its script/style children contain code.
-    if (scores.html >= 9 && /^<(?:!doctype\b|[A-Za-z])/i.test(start)) {
+    // Bei starkem XML-Signal (>= 10) gewinnt XML jedoch die Erkennung.
+    if (scores.html >= 9 && scores.xml < 10 && /^<(?:!doctype\b|[A-Za-z])/i.test(start)) {
       return result('html', 'high', 'content', reasons.html);
     }
 
@@ -292,7 +306,8 @@ main{padding-top:24px}
     mysql: "select p.id,p.name,p.status,count(t.id) as task_count,sum(case when t.completed=1 then 1 else 0 end) as completed_tasks from projects as p left join tasks as t on t.project_id=p.id where p.archived=0 and p.created_at>='2026-01-01' group by p.id,p.name,p.status having count(t.id)>0 order by completed_tasks desc,p.name asc limit 20;",
     php: '<?php\n$projects=[["name"=>"Studio Website","hours"=>12],["name"=>"Dashboard","hours"=>8],["name"=>"Brand Guidelines","hours"=>6]];function summarizeProjects(array $projects):array{$totalHours=array_sum(array_column($projects,"hours"));return["count"=>count($projects),"total_hours"=>$totalHours,"projects"=>array_map(fn(array $project):string=>$project["name"]." · ".$project["hours"]." h",$projects)];}$overview=summarizeProjects($projects);echo json_encode($overview,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);',
     python: 'from dataclasses import dataclass\n\n@dataclass\nclass Project:\n    name:str\n    hours:int\n    active:bool=True\n\ndef summarize_projects(projects:list[Project])->dict:\n    active=[project for project in projects if project.active]\n    return {"count":len(active),"total_hours":sum(project.hours for project in active),"projects":[{"name":project.name,"estimate":f"{project.hours} h"} for project in active]}\n\nprojects=[Project("Studio Website",12),Project("Dashboard",8),Project("Brand Guidelines",6,False)]\noverview=summarize_projects(projects)\nprint(overview)\n',
-    json: '{"workspace":"Studio","theme":"dark","settings":{"autoFormat":true,"indentation":2,"lineWidth":80},"projects":[{"id":1,"name":"Studio Website","status":"active","tags":["design","frontend"]},{"id":2,"name":"Dashboard","status":"planned","tags":["data","ui"]}],"lastOpened":null}'
+    json: '{"workspace":"Studio","theme":"dark","settings":{"autoFormat":true,"indentation":2,"lineWidth":80},"projects":[{"id":1,"name":"Studio Website","status":"active","tags":["design","frontend"]},{"id":2,"name":"Dashboard","status":"planned","tags":["data","ui"]}],"lastOpened":null}',
+    xml: '<?xml version="1.0" encoding="UTF-8"?><project name="prettycode" status="active"><metadata><created>2026-01-15</created><maintainer email="team@example.com">Studio Team</maintainer></metadata><modules><module id="formatter" enabled="true"><name>Formatierung</name><languages>HTML</languages><languages>CSS</languages><languages>JavaScript</languages></module><module id="minifier" enabled="true"><name>Minify</name><languages>HTML</languages><languages>CSS</languages></module><module id="validator" enabled="false"><name>Validierung</name><languages>JSON</languages></module></modules><settings><indentation>2</indentation><lineWidth>100</lineWidth><liveFormatting>true</liveFormatting></settings></project>'
   });
 
   root.CodeDetect = Object.freeze({ detect, samples, labels, extensions });
@@ -316,7 +331,8 @@ main{padding-top:24px}
     mysql: 'sql',
     php: 'php',
     python: 'python',
-    json: 'json'
+    json: 'json',
+    xml: 'xml'
   };
   let bundlePromise;
   let retryAfter = 0;
@@ -1072,6 +1088,306 @@ main{padding-top:24px}
     }
     const codeMinifiers = createCodeMinifiers();
 
+    /* ---------- XML: Tokenizer, Validator, Tree, Format, Minify ---------- */
+
+    function xmlPositionOf(source, index) {
+      const lines = source.slice(0, index).split('\n');
+      return { line: lines.length, column: lines[lines.length - 1].length + 1 };
+    }
+
+    function xmlError(message, source, index) {
+      const err = new Error(message);
+      if (typeof index === 'number' && index >= 0 && source) {
+        const pos = xmlPositionOf(source, index);
+        err.line = pos.line;
+        err.column = pos.column;
+      }
+      err.kind = 'syntax';
+      return err;
+    }
+
+    function tokenizeXML(source) {
+      const tokens = [];
+      const n = source.length;
+      let i = 0;
+      while (i < n) {
+        if (source[i] !== '<') {
+          const next = source.indexOf('<', i);
+          const end = next < 0 ? n : next;
+          tokens.push({ type: 'TEXT', text: source.slice(i, end), start: i, end });
+          i = end;
+          continue;
+        }
+        if (source.startsWith('<!--', i)) {
+          const end = source.indexOf('-->', i + 4);
+          if (end < 0) throw xmlError('Nicht abgeschlossener XML-Kommentar.', source, i);
+          tokens.push({ type: 'COMMENT', text: source.slice(i, end + 3), start: i, end: end + 3 });
+          i = end + 3;
+          continue;
+        }
+        if (source.startsWith('<![CDATA[', i)) {
+          const end = source.indexOf(']]>', i + 9);
+          if (end < 0) throw xmlError('Nicht abgeschlossener CDATA-Bereich.', source, i);
+          tokens.push({ type: 'CDATA', text: source.slice(i, end + 3), start: i, end: end + 3 });
+          i = end + 3;
+          continue;
+        }
+        if (/^<!doctype\b/i.test(source.slice(i, i + 9))) {
+          let j = i + 9;
+          let depth = 0;
+          let end = -1;
+          while (j < n) {
+            const c = source[j];
+            if (c === '[') depth++;
+            else if (c === ']') depth--;
+            else if (c === '>' && depth === 0) { end = j + 1; break; }
+            j++;
+          }
+          if (end < 0) throw xmlError('Nicht abgeschlossene DOCTYPE-Deklaration.', source, i);
+          tokens.push({ type: 'DOCTYPE', text: source.slice(i, end), start: i, end });
+          i = end;
+          continue;
+        }
+        if (source.startsWith('<?', i)) {
+          const end = source.indexOf('?>', i + 2);
+          if (end < 0) throw xmlError('Nicht abgeschlossene Verarbeitungsanweisung.', source, i);
+          tokens.push({ type: 'PI', text: source.slice(i, end + 2), start: i, end: end + 2 });
+          i = end + 2;
+          continue;
+        }
+        if (source[i + 1] === '/') {
+          const end = source.indexOf('>', i + 2);
+          if (end < 0) throw xmlError('Nicht abgeschlossenes schließendes Tag.', source, i);
+          const name = source.slice(i + 2, end).trim();
+          if (!/^[A-Za-z_:][\w:.-]*$/.test(name)) {
+            throw xmlError(`Ungültiger Tag-Name in </${name}>.`, source, i);
+          }
+          tokens.push({ type: 'CLOSE_TAG', text: source.slice(i, end + 1), name, start: i, end: end + 1 });
+          i = end + 1;
+          continue;
+        }
+        // Öffnendes Tag – '>' unter Beachtung von Attribut-Quotes finden.
+        let j = i + 1;
+        let quote = '';
+        while (j < n) {
+          const c = source[j];
+          if (quote) {
+            if (c === quote) quote = '';
+          } else if (c === '"' || c === "'") {
+            quote = c;
+          } else if (c === '>') {
+            break;
+          }
+          j++;
+        }
+        if (j >= n) throw xmlError('Nicht abgeschlossenes öffnendes Tag.', source, i);
+        const inner = source.slice(i + 1, j);
+        const selfMatch = inner.match(/\/\s*$/);
+        const selfClosing = Boolean(selfMatch);
+        const innerClean = selfClosing ? inner.slice(0, inner.length - selfMatch[0].length) : inner;
+        const nameMatch = innerClean.match(/^([^\s/>]+)/);
+        if (!nameMatch) throw xmlError('Tag-Name fehlt.', source, i);
+        const name = nameMatch[1];
+        if (!/^[A-Za-z_:][\w:.-]*$/.test(name)) {
+          throw xmlError(`Ungültiger Tag-Name "${name}".`, source, i);
+        }
+        const attrs = innerClean.slice(name.length);
+        tokens.push({ type: 'OPEN_TAG', text: source.slice(i, j + 1), name, attrs, selfClosing, start: i, end: j + 1 });
+        i = j + 1;
+      }
+      return tokens;
+    }
+
+    function validateXMLTokens(tokens, source) {
+      const stack = [];
+      let rootCount = 0;
+
+      function checkEntities(text, index) {
+        const bad = /&(?!(?:[A-Za-z_][\w.-]*|#\d+|#x[0-9a-fA-F]+);)/.exec(text);
+        if (bad) {
+          throw xmlError('Ungültige Zeichenreferenz. Verwende &amp; für ein literales Kaufmanns-Und.', source, index + bad.index);
+        }
+      }
+
+      for (const token of tokens) {
+        if (token.type === 'OPEN_TAG') {
+          if (stack.length === 0) rootCount++;
+          // Attribut-Syntax prüfen
+          const attrStr = token.attrs || '';
+          if (attrStr.trim()) {
+            const seen = new Set();
+            let cursor = 0;
+            const ns = attrStr.length;
+            while (cursor < ns) {
+              while (cursor < ns && /\s/.test(attrStr[cursor])) cursor++;
+              if (cursor >= ns) break;
+              const nameStart = cursor;
+              while (cursor < ns && !/[\s=]/.test(attrStr[cursor])) cursor++;
+              const attrName = attrStr.slice(nameStart, cursor);
+              const basePos = token.start + 1 + token.name.length + nameStart;
+              if (!attrName) throw xmlError(`Ungültiges Attribut in <${token.name}>.`, source, basePos);
+              if (!/^[A-Za-z_:][\w:.-]*$/.test(attrName)) {
+                throw xmlError(`Ungültiger Attributname "${attrName}" in <${token.name}>.`, source, basePos);
+              }
+              if (seen.has(attrName)) {
+                throw xmlError(`Doppeltes Attribut "${attrName}" in <${token.name}>.`, source, basePos);
+              }
+              seen.add(attrName);
+              while (cursor < ns && /\s/.test(attrStr[cursor])) cursor++;
+              if (attrStr[cursor] !== '=') {
+                throw xmlError(`Attribut "${attrName}" hat keinen Wert in <${token.name}>.`, source, basePos);
+              }
+              cursor++;
+              while (cursor < ns && /\s/.test(attrStr[cursor])) cursor++;
+              const quote = attrStr[cursor];
+              if (quote !== '"' && quote !== "'") {
+                throw xmlError(`Attributwert von "${attrName}" muss in Anführungszeichen stehen.`, source, token.start + 1 + token.name.length + cursor);
+              }
+              cursor++;
+              while (cursor < ns && attrStr[cursor] !== quote) cursor++;
+              if (cursor >= ns) {
+                throw xmlError(`Nicht geschlossener Attributwert für "${attrName}".`, source, token.start);
+              }
+              cursor++;
+            }
+          }
+          if (!token.selfClosing) stack.push({ name: token.name, token });
+        } else if (token.type === 'CLOSE_TAG') {
+          const top = stack.pop();
+          if (!top) throw xmlError(`Unerwartetes schließendes Tag </${token.name}>.`, source, token.start);
+          if (top.name !== token.name) {
+            throw xmlError(`Schließendes Tag </${token.name}> passt nicht zum geöffneten <${top.name}>.`, source, token.start);
+          }
+        } else if (token.type === 'TEXT') {
+          checkEntities(token.text, token.start);
+          if (token.text.trim() && stack.length === 0) {
+            throw xmlError('Text außerhalb des Wurzelelements.', source, token.start);
+          }
+        }
+      }
+
+      if (stack.length > 0) {
+        const top = stack[stack.length - 1];
+        throw xmlError(`Nicht geschlossenes Tag <${top.name}>.`, source, top.token.start);
+      }
+      if (rootCount === 0) throw xmlError('Kein Wurzelelement gefunden.', source, 0);
+      if (rootCount > 1) throw xmlError('Mehr als ein Wurzelelement – XML erlaubt genau eines.', source, 0);
+    }
+
+    function parseXMLTree(tokens) {
+      const prolog = [];
+      const epilog = [];
+      let root = null;
+      const stack = [];
+
+      for (const token of tokens) {
+        let node = null;
+        switch (token.type) {
+          case 'OPEN_TAG':
+            node = { type: 'element', name: token.name, attrs: token.attrs, selfClosing: token.selfClosing, children: [] };
+            break;
+          case 'TEXT':
+            if (!token.text) continue;
+            node = { type: 'text', text: token.text };
+            break;
+          case 'COMMENT': node = { type: 'comment', text: token.text }; break;
+          case 'CDATA':   node = { type: 'cdata',   text: token.text }; break;
+          case 'PI':      node = { type: 'pi',      text: token.text }; break;
+          case 'DOCTYPE': node = { type: 'doctype', text: token.text }; break;
+          case 'CLOSE_TAG': stack.pop(); continue;
+          default: continue;
+        }
+        if (stack.length === 0) {
+          if (node.type === 'element') root = node;
+          else if (root === null) prolog.push(node);
+          else epilog.push(node);
+        } else {
+          stack[stack.length - 1].children.push(node);
+        }
+        if (node.type === 'element' && !node.selfClosing) stack.push(node);
+      }
+      return { prolog, root, epilog };
+    }
+
+    function formatXMLTree(tree, options) {
+      const tabWidth = options.tabWidth || 2;
+      const indentUnit = options.useTabs ? '\t' : ' '.repeat(tabWidth);
+      const pad = depth => indentUnit.repeat(depth);
+      const isWsOnly = node => node.type === 'text' && !node.text.trim();
+
+      function serializeInline(node) {
+        switch (node.type) {
+          case 'text':    return node.text;
+          case 'comment': return node.text;
+          case 'cdata':   return node.text;
+          case 'pi':      return node.text;
+          case 'doctype': return node.text;
+          case 'element': {
+            const attr = node.attrs && node.attrs.trim() ? ' ' + node.attrs.trim() : '';
+            if (node.selfClosing) return '<' + node.name + attr + '/>';
+            const inner = node.children.map(serializeInline).join('');
+            return '<' + node.name + attr + '>' + inner + '</' + node.name + '>';
+          }
+          default: return '';
+        }
+      }
+
+      function serializeNode(node, depth) {
+        if (node.type !== 'element') return pad(depth) + serializeInline(node);
+        const attr = node.attrs && node.attrs.trim() ? ' ' + node.attrs.trim() : '';
+        if (node.selfClosing) return pad(depth) + '<' + node.name + attr + '/>';
+        const significant = node.children.filter(c => !isWsOnly(c));
+        const hasElements = significant.some(c => c.type !== 'text');
+        const hasText = significant.some(c => c.type === 'text');
+
+        if (significant.length === 0) {
+          return pad(depth) + '<' + node.name + attr + '></' + node.name + '>';
+        }
+        if (!hasElements || hasText) {
+          // Nur Textinhalt oder gemischter Inhalt → unverändert inline lassen.
+          const inner = node.children.map(serializeInline).join('');
+          return pad(depth) + '<' + node.name + attr + '>' + inner + '</' + node.name + '>';
+        }
+        // Reiner Elementinhalt → Blockformatierung.
+        const lines = significant.map(c => serializeNode(c, depth + 1));
+        return pad(depth) + '<' + node.name + attr + '>\n' + lines.join('\n') + '\n' + pad(depth) + '</' + node.name + '>';
+      }
+
+      const out = [];
+      for (const n of tree.prolog) if (!isWsOnly(n)) out.push(serializeNode(n, 0));
+      if (tree.root) out.push(serializeNode(tree.root, 0));
+      for (const n of tree.epilog) if (!isWsOnly(n)) out.push(serializeNode(n, 0));
+      return out.length ? out.join('\n') + '\n' : '';
+    }
+
+    function minifyXMLTree(tree) {
+      function minifyNode(node) {
+        switch (node.type) {
+          case 'text':    return node.text;
+          case 'comment': return node.text; // Kommentare bleiben erhalten.
+          case 'cdata':   return node.text;
+          case 'pi':      return node.text;
+          case 'doctype': return node.text;
+          case 'element': {
+            const attr = node.attrs && node.attrs.trim() ? ' ' + node.attrs.trim() : '';
+            if (node.selfClosing) return '<' + node.name + attr + '/>';
+            const significant = node.children.filter(c => !(c.type === 'text' && !c.text.trim()));
+            const hasElements = significant.some(c => c.type !== 'text');
+            const hasText = significant.some(c => c.type === 'text');
+            const mixed = hasElements && hasText;
+            const inner = (mixed ? node.children : significant).map(minifyNode).join('');
+            return '<' + node.name + attr + '>' + inner + '</' + node.name + '>';
+          }
+          default: return '';
+        }
+      }
+      const parts = [];
+      for (const n of tree.prolog) if (!(n.type === 'text' && !n.text.trim())) parts.push(minifyNode(n));
+      if (tree.root) parts.push(minifyNode(tree.root));
+      for (const n of tree.epilog) if (!(n.type === 'text' && !n.text.trim())) parts.push(minifyNode(n));
+      return parts.join('');
+    }
+
     async function getPython(id) {
       if (pythonPromise) return pythonPromise;
       pythonPromise = (async () => {
@@ -1250,6 +1566,24 @@ def _pretty_minify_python(source):
           code: options.minify === true ? codeMinifiers.minifyMySQL(source) : code.replace(/\s*$/, '\n'),
           engine: options.minify === true ? 'MySQL Token-Minifier' : 'SQL Formatter ' + SQL,
           validationNote: 'Formatierungsprüfung, keine vollständige MySQL-Validierung. DELIMITER und Stored Procedures werden nicht unterstützt.',
+        };
+      }
+
+      if (language === 'xml') {
+        const tokens = tokenizeXML(source);
+        validateXMLTokens(tokens, source);
+        const tree = parseXMLTree(tokens);
+        if (options.minify === true) {
+          return {
+            code: minifyXMLTree(tree),
+            engine: 'XML Token-Minifier',
+            validationNote: 'Wohlgeformtheitsprüfung; Kommentare, CDATA und Textinhalte bleiben erhalten. Nur redundante Einrückung zwischen Elementen wird entfernt.',
+          };
+        }
+        return {
+          code: formatXMLTree(tree, { tabWidth, useTabs: Boolean(options.useTabs) }),
+          engine: 'XML Formatter',
+          validationNote: 'Wohlgeformtheitsprüfung (Tag-Verschachtelung, Attribute, Entitäten), keine Schema-Validierung (DTD/XSD).',
         };
       }
 
@@ -1597,7 +1931,7 @@ def _pretty_minify_python(source):
     $('settingsNote').textContent=minify?'Formatierungsoptionen werden im Minify-Modus nicht angewendet.':language==='python'?'Python: Black verwendet 4 Leerzeichen und doppelte Anführungszeichen.':'Optionen gelten, soweit die jeweilige Sprache sie unterstützt.';
     $('semiToggle').disabled=minify||language!=='javascript';
     $('quoteToggle').disabled=minify||!['javascript','css','php'].includes(language);
-    $('engineStatus').textContent=language==='mysql'?'SQL Formatter':language==='python'?'Black':language?'Prettier':'–';
+    $('engineStatus').textContent=language==='mysql'?'SQL Formatter':language==='python'?'Black':language==='xml'?'XML Formatter':language?'Prettier':'–';
     document.querySelectorAll('[data-language]').forEach(button=>{
       const active=button.dataset.language===language;
       button.classList.toggle('active',active);
@@ -1661,6 +1995,7 @@ def _pretty_minify_python(source):
       let status=isAuto?CodeDetect.labels[language]+' erkannt und '+(minify?'minifiziert.':'formatiert.'):CodeDetect.labels[language]+' erfolgreich '+(minify?'minifiziert.':'formatiert.');
       if(language==='mysql')status='MySQL '+(minify?'minifiziert':'formatiert')+' · keine vollständige SQL-Validierung.';
       if(language==='python')status=minify?'Python minifiziert · notwendige Einrückungen bleiben erhalten.':'Python formatiert · 4 Leerzeichen nach Black-Standard.';
+      if(language==='xml')status='XML '+(minify?'minifiziert':'formatiert')+' · wohlgeformt.';
       if(language==='php')status+=' · Parser bis PHP 8.4';
       setStatus(status);
       const highlighted=await CodeHighlight.highlight(result.code,language);
