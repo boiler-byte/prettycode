@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111315">
+  <meta name="application-name" content="prettycode.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="prettycode.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
   <meta name="description" content="Code formatieren und minifizieren: HTML, CSS, JavaScript, MySQL, PHP, Python, JSON und XML mit Syntax-Highlighting und Fehleranzeige.">
   <title>prettycode. — Code-Formatter</title>
   <style>
@@ -34,6 +41,13 @@ main{padding-top:24px}
 @media(max-width:930px){.intro{align-items:flex-end}.toolbar-right{row-gap:10px}}
 @media(max-width:700px){main{padding-top:18px}.intro{align-items:flex-end;gap:0;margin-bottom:15px}.intro .import-actions{justify-content:flex-end}.toolbar-right{justify-content:flex-start;column-gap:12px;row-gap:10px}.toolbar-right .format-button{margin-left:auto}.format-button kbd{display:none}.mode-switches{gap:12px}.live-switch>span:last-child{font-size:10px}.bottom-notes{align-items:flex-end}}
 
+  /* PWA controls match the existing compact dark interface. */
+  .pwa-install{min-height:33px;padding:6px 11px;font-size:11px;gap:6px}
+  .pwa-install svg{width:14px;height:14px}
+  .offline-button{min-height:32px;font-size:11px;padding:6px 11px;flex-shrink:0}
+  .offline-button svg{width:14px;height:14px}
+  .offline-button:disabled{opacity:.6}
+  @media(max-width:700px){.pwa-install{min-height:31px;padding:5px 9px;font-size:10px}.header-actions{gap:7px}.offline-button{margin-left:0}}
   </style>
 </head>
 <body>
@@ -43,6 +57,7 @@ main{padding-top:24px}
       <span>prettycode<span class="brand-dot">.</span></span>
     </div>
     <div class="header-actions">
+      <button class="button button-secondary pwa-install" id="installButton" type="button" hidden aria-label="prettycode als App installieren"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M4 17v3h16v-3"/></svg>Installieren</button>
       <button class="icon-button" id="helpButton" title="Hilfe & Tastenkürzel" aria-label="Hilfe und Tastenkürzel öffnen"><span data-icon="help"></span></button>
     </div>
   </header>
@@ -87,6 +102,7 @@ main{padding-top:24px}
         <label><input type="checkbox" id="semiToggle" checked> Semikolons in JavaScript</label>
         <label><input type="checkbox" id="quoteToggle"> Einfache Anführungszeichen</label>
         <span id="settingsNote">Optionen gelten, soweit die jeweilige Sprache sie unterstützt.</span>
+        <button class="button button-secondary offline-button" id="offlineButton" type="button" title="Formatter-Bibliotheken für die Offline-Nutzung laden"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M4 17v3h16v-3"/></svg><span id="offlineButtonLabel">Offline vorbereiten</span></button>
       </div>
 
       <div class="editors" id="editors">
@@ -147,7 +163,7 @@ main{padding-top:24px}
     <div class="dialog-header"><span class="eyebrow">PRETTYCODE / HILFE</span><button class="icon-button" id="closeHelpButton" aria-label="Hilfe schließen"><span data-icon="close"></span></button></div>
     <h2>Ein Werkzeug. Acht Sprachen.</h2>
     <p>Füge Code ein, öffne eine Datei oder ziehe sie in die Eingabe. Das Ergebnis aktualisiert sich nach einer kurzen Schreibpause. Deine Eingabe bleibt dabei unverändert.</p>
-    <dl class="help-list"><div><dt>Minify</dt><dd>Der Schalter ist beim Öffnen ausgeschaltet. Eingeschaltet wird jeder Formatierungsvorgang zur Minifizierung, auch bei Dateiimport und Live-Eingabe. Notwendige Leerzeichen und Einrückungen bleiben erhalten; Bezeichner werden nicht umbenannt.</dd></div><div><dt>Automatische Erkennung</dt><dd>Dateiendungen und typische Sprachmerkmale helfen bei der Auswahl. Bei kurzen oder mehrdeutigen Ausschnitten kannst du die Sprache selbst festlegen.</dd></div><div><dt>Fehleranzeige</dt><dd>Parserfehler werden mit Zeile und Spalte angezeigt, sofern der Parser eine Position liefert. Die Formatierung ist keine vollständige Codeanalyse. MySQL erhält eine Formatierungsprüfung, keine Datenbankvalidierung. DELIMITER und Stored Procedures werden nicht unterstützt.</dd></div><div><dt>Python</dt><dd>Der Python-Formatter Black lädt beim ersten Einsatz eine zusätzliche Browser-Laufzeit. Das kann einen Moment dauern. Im normalen Formatierungsmodus verwendet Black vier Leerzeichen; die Einrückungseinstellung gilt hier nicht. Minify entfernt überflüssigen Leerraum und behält notwendige Python-Einrückungen bei. Dein Python-Code wird nicht ausgeführt.</dd></div><div><dt>XML</dt><dd>Wohlgeformtheitsprüfung mit Tag-Verschachtelung, Attribut-Syntax und Entitätsreferenzen; keine Schema-Validierung (DTD/XSD). Die Formatierung richtet Elementinhalte ein und lässt Textinhalte sowie gemischte Inhalte unverändert. Minify entfernt nur überflüssige Einrückung zwischen Elementen – Kommentare, CDATA und Text bleiben erhalten.</dd></div><div><dt>Browser &amp; Datenschutz</dt><dd>Dein Code wird lokal verarbeitet und nicht an einen Formatierungsserver gesendet. Externe Bibliotheken werden bei Bedarf über CDN geladen; dafür ist Internet nötig. Es werden keine Codeeingaben dauerhaft gespeichert. Dateien bis 1 MiB werden unterstützt.</dd></div></dl>
+    <dl class="help-list"><div><dt>Minify</dt><dd>Der Schalter ist beim Öffnen ausgeschaltet. Eingeschaltet wird jeder Formatierungsvorgang zur Minifizierung, auch bei Dateiimport und Live-Eingabe. Notwendige Leerzeichen und Einrückungen bleiben erhalten; Bezeichner werden nicht umbenannt.</dd></div><div><dt>Automatische Erkennung</dt><dd>Dateiendungen und typische Sprachmerkmale helfen bei der Auswahl. Bei kurzen oder mehrdeutigen Ausschnitten kannst du die Sprache selbst festlegen.</dd></div><div><dt>Fehleranzeige</dt><dd>Parserfehler werden mit Zeile und Spalte angezeigt, sofern der Parser eine Position liefert. Die Formatierung ist keine vollständige Codeanalyse. MySQL erhält eine Formatierungsprüfung, keine Datenbankvalidierung. DELIMITER und Stored Procedures werden nicht unterstützt.</dd></div><div><dt>Python</dt><dd>Der Python-Formatter Black lädt beim ersten Einsatz eine zusätzliche Browser-Laufzeit. Das kann einen Moment dauern. Im normalen Formatierungsmodus verwendet Black vier Leerzeichen; die Einrückungseinstellung gilt hier nicht. Minify entfernt überflüssigen Leerraum und behält notwendige Python-Einrückungen bei. Dein Python-Code wird nicht ausgeführt.</dd></div><div><dt>XML</dt><dd>Wohlgeformtheitsprüfung mit Tag-Verschachtelung, Attribut-Syntax und Entitätsreferenzen; keine Schema-Validierung (DTD/XSD). Die Formatierung richtet Elementinhalte ein und lässt Textinhalte sowie gemischte Inhalte unverändert. Minify entfernt nur überflüssige Einrückung zwischen Elementen – Kommentare, CDATA und Text bleiben erhalten.</dd></div><div><dt>Installation &amp; Offline</dt><dd>prettycode. lässt sich in unterstützten Browsern als App installieren. Öffne die Formatierungsoptionen (Schieberegler) und wähle „Offline vorbereiten“, solange du online bist. Damit werden die Bibliotheken für HTML, CSS, JavaScript, MySQL, PHP, JSON und XML sowie Syntaxfarben lokal zwischengespeichert. Die große Python-/Black-Laufzeit und ihre Python-Pakete müssen zunächst online geladen werden und sind offline nicht in jedem Browser zuverlässig verfügbar. Deine Eingaben werden nicht im Cache gespeichert. Installation und Offline-Modus erfordern HTTPS oder localhost.</dd></div><div><dt>Browser &amp; Datenschutz</dt><dd>Dein Code wird lokal verarbeitet und nicht an einen Formatierungsserver gesendet. Externe Bibliotheken werden bei Bedarf über CDN geladen; dafür ist Internet nötig. Es werden keine Codeeingaben dauerhaft gespeichert. Dateien bis 1 MiB werden unterstützt.</dd></div></dl>
     <div class="shortcut-list"><span><kbd class="cmd-key">Ctrl</kbd> + <kbd>Enter</kbd> Formatieren</span><span><kbd class="cmd-key">Ctrl</kbd> + <kbd>O</kbd> Datei öffnen</span><span><kbd>Tab</kbd> Einrücken</span><span><kbd>Esc</kbd>, dann <kbd>Tab</kbd> Eingabe verlassen</span></div>
     <p class="library-note">Mit Prettier, SQL Formatter, Black / Pyodide, sprachspezifischen Minifiern und highlight.js. Syntaxfarben dienen der Lesbarkeit und ersetzen keine Prüfung.</p>
     <button class="button button-primary" id="gotItButton">Alles klar <span data-icon="check"></span></button>
@@ -2162,6 +2178,110 @@ def _pretty_minify_python(source):
   replaceSource(CodeDetect.samples.javascript,{example:'javascript',auto:true});
 })();
 
+  </script>
+
+  <script>
+  (() => {
+    'use strict';
+    const installButton = document.getElementById('installButton');
+    const offlineButton = document.getElementById('offlineButton');
+    const offlineLabel = document.getElementById('offlineButtonLabel');
+    const toastText = document.getElementById('toastText');
+    const toastNode = document.getElementById('toast');
+    let deferredInstallPrompt = null;
+    let toastTimer;
+
+    function notice(message, duration = 5200) {
+      // Reuse the application's accessible toast without touching source code.
+      clearTimeout(toastTimer);
+      toastText.textContent = message;
+      toastNode.hidden = false;
+      toastTimer = setTimeout(() => { toastNode.hidden = true; }, duration);
+    }
+
+    function isStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    }
+    function updateInstallButton() {
+      installButton.hidden = isStandalone();
+    }
+
+    window.addEventListener('beforeinstallprompt', event => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      updateInstallButton();
+    });
+    window.addEventListener('appinstalled', () => {
+      deferredInstallPrompt = null;
+      updateInstallButton();
+      notice('prettycode. ist jetzt als App installiert.');
+    });
+    installButton.addEventListener('click', async () => {
+      if (deferredInstallPrompt) {
+        const prompt = deferredInstallPrompt;
+        deferredInstallPrompt = null;
+        await prompt.prompt();
+        try { await prompt.userChoice; } catch (_) { /* Browser-specific. */ }
+        updateInstallButton();
+        return;
+      }
+      const appleMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      notice(appleMobile
+        ? 'In Safari: Teilen → Zum Home-Bildschirm, um prettycode. zu installieren.'
+        : 'Über das Browsermenü „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.', 8500);
+    });
+    updateInstallButton();
+
+    async function prepareOffline() {
+      if (!('serviceWorker' in navigator) || !window.isSecureContext) {
+        notice('Für die Offline-Funktion bitte HTTPS oder localhost verwenden.', 7000);
+        return;
+      }
+      offlineButton.disabled = true;
+      offlineLabel.textContent = 'Offline-Paket wird geladen …';
+      try {
+        const registration = await navigator.serviceWorker.ready;
+        const worker = navigator.serviceWorker.controller || registration.active;
+        if (!worker) throw new Error('Der Offline-Dienst ist noch nicht aktiv. Bitte die Seite neu laden.');
+        const result = await new Promise((resolve, reject) => {
+          const channel = new MessageChannel();
+          const timeout = setTimeout(() => {
+            channel.port1.close();
+            reject(new Error('Offline-Vorbereitung konnte nicht abgeschlossen werden.'));
+          }, 180000);
+          channel.port1.onmessage = event => {
+            const data = event.data || {};
+            if (data.type === 'PROGRESS') {
+              offlineLabel.textContent = `Offline-Paket ${data.done}/${data.total}`;
+            } else if (data.type === 'DONE') {
+              clearTimeout(timeout);
+              channel.port1.close();
+              resolve(data);
+            }
+          };
+          worker.postMessage({ type: 'PREPARE_OFFLINE' }, [channel.port2]);
+        });
+        if (result.failed === 0) {
+          notice('Offline-Paket bereit: HTML, CSS, JS, MySQL, PHP, JSON und XML.', 6500);
+        } else {
+          notice(`${result.done}/${result.total} Offline-Bibliotheken verfügbar. Fehlende Module erfordern Internet.`, 8500);
+        }
+      } catch (error) {
+        notice(error.message || 'Offline-Paket konnte nicht geladen werden.', 7000);
+      } finally {
+        offlineLabel.textContent = 'Offline vorbereiten';
+        offlineButton.disabled = false;
+      }
+    }
+    offlineButton.addEventListener('click', prepareOffline);
+
+    if ('serviceWorker' in navigator && window.isSecureContext) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './', updateViaCache: 'none' })
+          .catch(() => { /* File://, browser policy and private modes may disallow workers. */ });
+      });
+    }
+  })();
   </script>
 </body>
 </html>
